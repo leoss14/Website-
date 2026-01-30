@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uber RL Clustering - Leonardo Luksic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        :root {
+            --primary-dark: #0a1929;
+            --primary-blue: #1e3a5f;
+            --accent-cyan: #00d4ff;
+            --accent-amber: #ffa726;
+            --accent-hot: #ff4444;
+            --accent-cold: #4444ff;
+            --text-primary: #e8eef3;
+            --text-secondary: #8b9aa8;
+            --card-bg: #132337;
+            --card-border: #1e3a5f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 25, 41, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--accent-cyan); }
+
+        /* Hero */
+        .project-hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #0a1929 0%, #1e3a5f 100%);
+            text-align: center;
+        }
+
+        .project-hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 0 auto 2rem;
+        }
+
+        .project-meta-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .meta-value {
+            font-size: 1.3rem;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        /* Theory Box */
+        .theory-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 167, 38, 0.1));
+            border: 2px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .theory-box h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Code/Formula Box */
+        .formula-box {
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        /* Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            background: var(--primary-blue);
+        }
+
+        .card-header h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text-primary);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Hot/Cold Zone Indicators */
+        .zone-hot {
+            background: rgba(255, 68, 68, 0.2);
+            border-left: 4px solid var(--accent-hot);
+        }
+
+        .zone-warm {
+            background: rgba(255, 170, 68, 0.2);
+            border-left: 4px solid var(--accent-amber);
+        }
+
+        .zone-cold {
+            background: rgba(68, 68, 255, 0.2);
+            border-left: 4px solid var(--accent-cold);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th {
+            background: var(--primary-blue);
+            color: var(--accent-cyan);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--card-border);
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .hot-zone-row {
+            background: rgba(255, 68, 68, 0.1);
+        }
+
+        .cold-zone-row {
+            background: rgba(68, 68, 255, 0.1);
+        }
+
+        /* Step Grid */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: var(--accent-cyan);
+            transform: scale(1.02);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* CTA */
+        .cta-btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            margin: 0 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-cyan), #0088cc);
+            color: var(--primary-dark);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="index.html" class="logo">LL</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">All Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <div class="project-hero">
+        <h1>Uber NYC: RL Order-Dispatch & Clustering</h1>
+        <p class="subtitle">
+            Reinforcement learning framework for ridesharing optimization using geographic clustering 
+            to identify hot/cold demand zones and implement advantage function-based matching
+        </p>
+        
+        <div class="project-meta-bar">
+            <div class="meta-item">
+                <span class="meta-label">Observations</span>
+                <span class="meta-value">1,028,136</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Geographic Zones</span>
+                <span class="meta-value">6</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Framework</span>
+                <span class="meta-value">MDP</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Method</span>
+                <span class="meta-value">K-Means + TD Learning</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RL Framework Overview -->
+    <section>
+        <h2 class="section-title">Reinforcement Learning Framework</h2>
+        <p class="section-subtitle">Markov Decision Process for order-dispatch optimization</p>
+
+        <div class="theory-box">
+            <h3>🤖 MDP Formulation (Xu et al., 2018)</h3>
+            <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                Ridesharing matching is formulated as a Markov Decision Process where each driver is an agent 
+                making sequential decisions to maximize long-term rewards. Unlike myopic closest-driver policies 
+                that only minimize pickup distance, the MDP approach optimizes advantage functions considering 
+                both immediate and future rewards.
+            </p>
+
+            <div class="formula-box">
+                <strong style="color: var(--accent-cyan);">STATE (S<sub>t</sub>):</strong> Driver's situation<br>
+                • Location: Geographic grid/zone (0-5)<br>
+                • Time: Hour of day (0-23), Day of week (0-6)<br>
+                • State = (time_index, location_index)
+            </div>
+
+            <div class="formula-box">
+                <strong style="color: var(--accent-amber);">ACTIONS (A<sub>t</sub>):</strong> Two types<br>
+                1. SERVING: Accept order → transition to destination zone<br>
+                2. IDLE: Stay in same location, wait for next opportunity
+            </div>
+
+            <div class="formula-box">
+                <strong style="color: var(--accent-cyan);">REWARDS (R<sub>t</sub>):</strong> Optimization objectives<br>
+                • Completion rate (binary: 0/1)<br>
+                • Driver's income from completed trips<br>
+                • Answer rate (% of accepted orders)
+            </div>
+        </div>
+
+        <div class="steps-grid">
+            
+            <div class="step-card" style="border-left: 4px solid var(--accent-cyan);">
+                <div class="step-icon">📊</div>
+                <h4 class="step-title" style="color: var(--accent-cyan);">1. Observe State</h4>
+                <p style="color: var(--text-secondary);">
+                    System monitors: 50 drivers in Manhattan zone, 80 pending requests, 
+                    18:00 Friday (peak time), historical patterns from this cluster
+                </p>
+            </div>
+
+            <div class="step-card" style="border-left: 4px solid var(--accent-amber);">
+                <div class="step-icon">🎯</div>
+                <h4 class="step-title" style="color: var(--accent-amber);">2. Make Decision</h4>
+                <p style="color: var(--text-secondary);">
+                    Algorithm chooses: Match Driver A (in cold zone) with Passenger B (order to hot zone), 
+                    maximizing advantage function A(i,j)
+                </p>
+            </div>
+
+            <div class="step-card" style="border-left: 4px solid #4caf50;">
+                <div class="step-icon">📈</div>
+                <h4 class="step-title" style="color: #4caf50;">3. Observe Outcome</h4>
+                <p style="color: var(--text-secondary);">
+                    Track results: Passenger accepted, trip completed, driver now in high-value zone, 
+                    nearby demand patterns updated
+                </p>
+            </div>
+
+            <div class="step-card" style="border-left: 4px solid #e91e63;">
+                <div class="step-icon">🧠</div>
+                <h4 class="step-title" style="color: #e91e63;">4. Learn & Update</h4>
+                <p style="color: var(--text-secondary);">
+                    TD update: V(s) ← V(s) + α[r + γ<sup>Δt</sup>V(s') - V(s)], 
+                    refining value estimates over millions of observations
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Advantage Function -->
+    <section style="background: rgba(19, 35, 55, 0.3); border-radius: 16px; padding: 4rem 2rem;">
+        <h2 class="section-title">Advantage Function Theory</h2>
+
+        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 2.5rem; margin-bottom: 2rem;">
+            <h3 style="font-family: 'Syne', sans-serif; font-size: 1.6rem; color: var(--accent-cyan); margin-bottom: 1.5rem;">
+                Mathematical Formulation
+            </h3>
+
+            <div style="background: rgba(0, 212, 255, 0.05); padding: 2rem; border-radius: 8px; overflow-x: auto; text-align: center; margin: 1.5rem 0;">
+                $$A(i,j) = r_{i,j} + \gamma^{\Delta t_{i,j}} V(s'_{i,j}) - V(s_i)$$
+                <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-secondary); text-align: left;">
+                    Where:<br>
+                    • <strong>r<sub>i,j</sub></strong>: Expected revenue from driver <em>i</em> serving order <em>j</em><br>
+                    • <strong>V(s'<sub>i,j</sub>)</strong>: Value of destination zone (future earning potential)<br>
+                    • <strong>V(s<sub>i</sub>)</strong>: Value of current zone<br>
+                    • <strong>γ<sup>Δt</sup></strong>: Discount factor over trip duration (γ = 0.9)
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
+                
+                <div style="background: rgba(0, 212, 255, 0.1); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--accent-cyan);">
+                    <h5 style="color: var(--accent-cyan); margin-bottom: 0.8rem; font-size: 1.1rem;">Immediate Reward</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        r<sub>i,j</sub>: Trip fare/revenue
+                    </p>
+                </div>
+
+                <div style="background: rgba(255, 167, 38, 0.1); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--accent-amber);">
+                    <h5 style="color: var(--accent-amber); margin-bottom: 0.8rem; font-size: 1.1rem;">Future Value</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        +γ<sup>Δt</sup>V(s'): Earning potential at destination
+                    </p>
+                </div>
+
+                <div style="background: rgba(255, 68, 68, 0.1); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--accent-hot);">
+                    <h5 style="color: var(--accent-hot); margin-bottom: 0.8rem; font-size: 1.1rem;">Opportunity Cost</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        -V(s): Forgone value of staying in current zone
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Worked Examples -->
+        <h3 style="font-size: 1.8rem; margin: 3rem 0 1.5rem; color: var(--text-primary);">
+            Advantage Function Examples
+        </h3>
+
+        <div class="content-grid">
+            
+            <div class="content-card" style="border-left: 4px solid #4caf50;">
+                <div class="card-header" style="background: rgba(76, 175, 80, 0.2);">
+                    <h3 style="color: #4caf50;">✅ Scenario 1: COLD → HOT</h3>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1rem; font-weight: 600;">Driver in Newark (V=5) → Order to Midtown (V=28)</p>
+                    <div style="background: rgba(76, 175, 80, 0.1); padding: 1rem; border-radius: 6px; font-family: monospace;">
+                        A = 30 + 0.9³ × 28.0 - 5.0<br>
+                        A = 30 + 20.4 - 5.0<br>
+                        <strong style="color: #4caf50;">A = 45.4 ⭐ HIGH</strong>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-secondary);">
+                        <strong>Result:</strong> Selected! System wants to move driver from cold to hot zone.
+                    </p>
+                </div>
+            </div>
+
+            <div class="content-card" style="border-left: 4px solid #f44336;">
+                <div class="card-header" style="background: rgba(244, 67, 54, 0.2);">
+                    <h3 style="color: #f44336;">❌ Scenario 2: HOT → COLD</h3>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1rem; font-weight: 600;">Driver in Midtown (V=28) → Order to Newark (V=5)</p>
+                    <div style="background: rgba(244, 67, 54, 0.1); padding: 1rem; border-radius: 6px; font-family: monospace;">
+                        A = 30 + 0.9³ × 5.0 - 28.0<br>
+                        A = 30 + 3.6 - 28.0<br>
+                        <strong style="color: #f44336;">A = 5.6 ⭐ LOW</strong>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-secondary);">
+                        <strong>Result:</strong> Not selected. Leaving high-value zone has high opportunity cost.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="background: rgba(0, 212, 255, 0.1); border: 2px solid var(--accent-cyan); border-radius: 12px; padding: 2rem; margin-top: 2rem;">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.3rem;">
+                🎯 Key Insight: Natural Driver Flow
+            </h4>
+            <p style="font-size: 1.05rem; line-height: 1.8;">
+                The advantage function creates emergent behavior: drivers naturally flow from cold (low-value) 
+                zones to hot (high-value) zones WITHOUT explicit routing rules. The -V(s<sub>i</sub>) term 
+                gives priority to drivers in underserved areas, while +V(s'<sub>j</sub>) attracts them to 
+                high-demand destinations. This achieves optimal fleet positioning through economic incentives 
+                embedded in the optimization.
+            </p>
+        </div>
+    </section>
+
+    <!-- Hot vs Cold Zones -->
+    <section>
+        <h2 class="section-title">Hot Zones vs Cold Zones</h2>
+        <p class="section-subtitle">Geographic clustering reveals value heterogeneity across NYC</p>
+
+        <table style="border: 1px solid var(--card-border);">
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Geographic Area</th>
+                    <th>Total Rides</th>
+                    <th>% of Total</th>
+                    <th>Peak Hour</th>
+                    <th>Classification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="hot-zone-row">
+                    <td style="font-weight: 700; color: var(--accent-hot);">1</td>
+                    <td>Midtown / Chelsea</td>
+                    <td>431,252</td>
+                    <td>41.9%</td>
+                    <td>18:00</td>
+                    <td><strong style="color: var(--accent-hot);">🔥 HOT</strong></td>
+                </tr>
+                <tr class="hot-zone-row">
+                    <td style="font-weight: 700; color: var(--accent-hot);">0</td>
+                    <td>Upper East Side</td>
+                    <td>357,299</td>
+                    <td>34.8%</td>
+                    <td>18:00</td>
+                    <td><strong style="color: var(--accent-hot);">🔥 HOT</strong></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700; color: var(--accent-amber);">4</td>
+                    <td>Brooklyn / Lower Manhattan</td>
+                    <td>142,005</td>
+                    <td>13.8%</td>
+                    <td>21:00</td>
+                    <td><strong style="color: var(--accent-amber);">🌡️ WARM</strong></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700; color: var(--accent-amber);">5</td>
+                    <td>LaGuardia / East Queens</td>
+                    <td>53,764</td>
+                    <td>5.2%</td>
+                    <td>20:00</td>
+                    <td><strong style="color: var(--accent-amber);">🌡️ WARM</strong></td>
+                </tr>
+                <tr class="cold-zone-row">
+                    <td style="font-weight: 700; color: var(--accent-cold);">2</td>
+                    <td>JFK Airport Area</td>
+                    <td>33,489</td>
+                    <td>3.3%</td>
+                    <td>14:00</td>
+                    <td><strong style="color: var(--accent-cold);">❄️ COLD</strong></td>
+                </tr>
+                <tr class="cold-zone-row">
+                    <td style="font-weight: 700; color: var(--accent-cold);">3</td>
+                    <td>Newark / New Jersey</td>
+                    <td>10,327</td>
+                    <td>1.0%</td>
+                    <td>15:00</td>
+                    <td><strong style="color: var(--accent-cold);">❄️ COLD</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-primary);">
+                How MDP Dispatch Uses Zone Classification
+            </h3>
+
+            <div class="content-grid">
+                
+                <div class="content-card zone-hot">
+                    <div class="card-header">
+                        <h3 style="color: var(--accent-hot);">🔥 HOT Zones (High V(s))</h3>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;"><strong>Midtown, Upper East Side</strong></p>
+                        <ul style="list-style: none; padding: 0; color: var(--text-secondary);">
+                            <li style="margin-bottom: 0.8rem;">
+                                <span style="color: var(--accent-hot);">▸</span> 
+                                Strong future earning potential
+                            </li>
+                            <li style="margin-bottom: 0.8rem;">
+                                <span style="color: var(--accent-hot);">▸</span> 
+                                Orders ending here get +V(s') boost
+                            </li>
+                            <li style="margin-bottom: 0.8rem;">
+                                <span style="color: var(--accent-hot);">▸</span> 
+                                Drivers reluctant to leave (high opportunity cost)
+                            </li>
+                            <li>
+                                <span style="color: var(--accent-hot);">▸</span> 
+                                System positions more capacity here
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-card zone-cold">
+                    <div class="card-header">
+                        <h3 style="color: var(--accent-cold);">❄️ COLD Zones (Low V(s))</h3>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;"><strong>Newark, Small Outer Areas</strong></p>
+                        <ul style="list-style: none; padding: 0; color: var(--text-secondary);">
+                            <li style="margin-bottom: 0.8rem;">
+                                <span style="color: var(--accent-cold);">▸</span> 
+                                Limited future opportunities
+                            </li>
+                            <li style="margin-bottom: 0.8rem;">
+                                <span style="color: var(--accent-cold);">▸</span> 
+                                Drivers here get PRIORITY (-V(s) is small)
+                            </li>
+                            <li style="margin-bottom: 0.8rem;">
+                                <span style="color: var(--accent-cold);">▸</span> 
+                                System wants to move drivers OUT
+                            </li>
+                            <li>
+                                <span style="color: var(--accent-cold);">▸</span> 
+                                Acts as source of available capacity
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Findings -->
+    <section>
+        <h2 class="section-title">Key Findings</h2>
+
+        <div class="theory-box">
+            <h3>📍 Geographic Distribution</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: var(--accent-amber);">▸</span>
+                    Manhattan dominates: 76.7% of rides across hot zones (Midtown + Upper East Side)
+                </li>
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: var(--accent-amber);">▸</span>
+                    Airport zones (JFK, LaGuardia, Newark): 4.3% combined, but strategic importance
+                </li>
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: var(--accent-amber);">▸</span>
+                    K=6 achieves optimal balance: Detailed enough for zone-specific strategies, simple enough for implementation
+                </li>
+            </ul>
+        </div>
+
+        <div class="theory-box" style="border-color: var(--accent-amber);">
+            <h3 style="color: var(--accent-amber);">⏰ Temporal Patterns</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: var(--accent-cyan);">▸</span>
+                    System peak: 18:00 (evening commute) across hot zones
+                </li>
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: var(--accent-cyan);">▸</span>
+                    Airport zones peak earlier: 14:00-15:00 (different demand drivers)
+                </li>
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: var(--accent-cyan);">▸</span>
+                    Weekend uplift varies: JFK 35% weekend vs Midtown 23% (zone-specific patterns)
+                </li>
+            </ul>
+        </div>
+
+        <div class="theory-box" style="border-color: #4caf50;">
+            <h3 style="color: #4caf50;">🚀 Real-World Performance (Xu et al., 2018)</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: #4caf50;">▸</span>
+                    Deployed in 20+ cities successfully
+                </li>
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: #4caf50;">▸</span>
+                    Completion rate improvement: +0.5% to +5% depending on city
+                </li>
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: #4caf50;">▸</span>
+                    Gross Merchandise Value (GMV): Consistent revenue increase
+                </li>
+                <li style="padding: 0.8rem 0 0.8rem 2rem; position: relative; font-size: 1.05rem;">
+                    <span style="position: absolute; left: 0; color: #4caf50;">▸</span>
+                    Serves millions of trips daily in production
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Technical Details -->
+    <section>
+        <h2 class="section-title">Technical Implementation</h2>
+
+        <div class="content-grid">
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Clustering Algorithm</h3>
+                </div>
+                <div class="card-body">
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li><strong style="color: var(--accent-cyan);">Algorithm:</strong> K-Means</li>
+                        <li><strong style="color: var(--accent-cyan);">K:</strong> 6 clusters</li>
+                        <li><strong style="color: var(--accent-cyan);">Features:</strong> Latitude, Longitude</li>
+                        <li><strong style="color: var(--accent-cyan);">Initialization:</strong> k-means++ (20 runs)</li>
+                        <li><strong style="color: var(--accent-cyan);">Computational:</strong> Saved to pickle (run once)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>RL Framework</h3>
+                </div>
+                <div class="card-body">
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li><strong style="color: var(--accent-amber);">Method:</strong> MDP Order Dispatch</li>
+                        <li><strong style="color: var(--accent-amber);">Learning:</strong> TD (Temporal Difference)</li>
+                        <li><strong style="color: var(--accent-amber);">State Space:</strong> 1,008 states (6×24×7)</li>
+                        <li><strong style="color: var(--accent-amber);">Discount:</strong> γ = 0.9</li>
+                        <li><strong style="color: var(--accent-amber);">Optimization:</strong> Advantage function maximization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Tools & Libraries</h3>
+                </div>
+                <div class="card-body">
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li><strong style="color: var(--accent-cyan);">Python:</strong> Pandas, NumPy</li>
+                        <li><strong style="color: var(--accent-cyan);">ML:</strong> Scikit-learn (K-Means)</li>
+                        <li><strong style="color: var(--accent-cyan);">Viz:</strong> Plotly (interactive maps)</li>
+                        <li><strong style="color: var(--accent-cyan);">Static:</strong> Matplotlib, Seaborn</li>
+                        <li><strong style="color: var(--accent-cyan);">Data:</strong> NYC TLC (1M+ rides)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Academic Foundation</h3>
+                </div>
+                <div class="card-body">
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li><strong style="color: var(--accent-amber);">Xu et al. (2018):</strong> MDP dispatch</li>
+                        <li><strong style="color: var(--accent-amber);">Tang et al. (2019):</strong> Deep VNet</li>
+                        <li><strong style="color: var(--accent-amber);">Wan et al. (2021):</strong> Pattern transfer</li>
+                        <li><strong style="color: var(--accent-amber);">Course:</strong> ST455 RL (LSE)</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section>
+        <h2 class="section-title">Skills Demonstrated</h2>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem 0;">
+            <span style="padding: 0.8rem 1.5rem; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-cyan); border-radius: 25px; font-weight: 600;">Reinforcement Learning</span>
+            <span style="padding: 0.8rem 1.5rem; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-cyan); border-radius: 25px; font-weight: 600;">Markov Decision Processes</span>
+            <span style="padding: 0.8rem 1.5rem; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-cyan); border-radius: 25px; font-weight: 600;">K-Means Clustering</span>
+            <span style="padding: 0.8rem 1.5rem; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-cyan); border-radius: 25px; font-weight: 600;">Value Function Estimation</span>
+            <span style="padding: 0.8rem 1.5rem; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-cyan); border-radius: 25px; font-weight: 600;">TD Learning</span>
+            <span style="padding: 0.8rem 1.5rem; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-cyan); border-radius: 25px; font-weight: 600;">Geospatial Analysis</span>
+            <span style="padding: 0.8rem 1.5rem; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-cyan); border-radius: 25px; font-weight: 600;">Interactive Visualization</span>
+            <span style="padding: 0.8rem 1.5rem; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-cyan); border-radius: 25px; font-weight: 600;">Policy Optimization</span>
+            <span style="padding: 0.8rem 1.5rem; background: rgba(0, 212, 255, 0.15); border: 1px solid var(--accent-cyan); border-radius: 25px; font-weight: 600;">Operations Research</span>
+        </div>
+    </section>
+
+    <!-- Future Work -->
+    <section style="background: rgba(255, 167, 38, 0.1); border: 2px solid var(--accent-amber); border-radius: 16px; padding: 3rem 2rem; margin: 2rem 0;">
+        <h2 class="section-title" style="color: var(--accent-amber); text-align: center;">
+            📈 Extension: Surge Pricing Economics
+        </h2>
+        <p style="font-size: 1.1rem; line-height: 1.8; text-align: center; max-width: 900px; margin: 0 auto; color: var(--text-secondary);">
+            Building on this RL framework, the next phase analyzes how surge pricing functions as an 
+            <strong style="color: var(--text-primary);">algorithmic demand stabilization mechanism</strong> 
+            through dynamic price discrimination. By varying prices across zones and time, the system flattens 
+            demand volatility and maintains market equilibrium—a sophisticated application of Ramsey pricing theory 
+            in platform economics.
+        </p>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <p style="font-style: italic; color: var(--text-secondary); font-size: 0.95rem;">
+                Coming soon: Price elasticity analysis, equilibrium modeling, and welfare implications
+            </p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="text-align: center; padding: 4rem 2rem;">
+        <h3 style="font-family: 'Syne', sans-serif; font-size: 2rem; margin-bottom: 2rem; color: var(--text-primary);">
+            View Full Analysis
+        </h3>
+        <a href="https://github.com/leoss14/code-portfolio" target="_blank" class="cta-btn btn-primary">
+            📓 View Notebook on GitHub
+        </a>
+        <a href="projects.html" class="cta-btn btn-secondary">
+            ← Back to All Projects
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--card-border);">
+        <div style="margin-bottom: 1.5rem;">
+            <strong style="color: var(--text-primary);">Academic References:</strong><br>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">
+                Xu et al. (2018), Tang et al. (2019), Wan et al. (2021) | ST455 Reinforcement Learning, LSE
+            </p>
+        </div>
+        <p style="color: var(--text-secondary);">© 2026 Leonardo Luksic · Data Science Portfolio</p>
+    </footer>
+
+</body>
+</html>
