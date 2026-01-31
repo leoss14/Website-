@@ -279,69 +279,7 @@
             </p>
         </div>
 
-        <div class="theory-box" style="margin-top: 3rem;">
-            <h3>The Mathematics: MDP Formulation</h3>
-            
-            <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem;">
-                The matching problem is formalized as a Markov Decision Process where the system learns 
-                optimal driver-passenger assignments through millions of trip observations:
-            </p>
-
-            <div style="background: var(--blue-light); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--blue-main); margin: 1.5rem 0;">
-                <strong style="color: var(--blue-deep); font-size: 1.2rem;">State Space (S):</strong>
-                <p style="margin-top: 0.8rem; color: var(--text-medium); line-height: 1.8;">
-                    Driver's current location (263 TLC zones) × Time of day (24 hours) × Day of week (7 days)<br>
-                    <strong>Total states:</strong> 263 × 24 × 7 = 44,184 possible states
-                </p>
-            </div>
-
-            <div style="background: var(--blue-light); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--blue-main); margin: 1.5rem 0;">
-                <strong style="color: var(--blue-deep); font-size: 1.2rem;">Actions (A):</strong>
-                <p style="margin-top: 0.8rem; color: var(--text-medium); line-height: 1.8;">
-                    <strong>SERVE:</strong> Accept the trip, transition to destination zone<br>
-                    <strong>IDLE:</strong> Remain in current location, wait for next request
-                </p>
-            </div>
-
-            <div style="background: var(--blue-light); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--blue-main); margin: 1.5rem 0;">
-                <strong style="color: var(--blue-deep); font-size: 1.2rem;">Reward (R):</strong>
-                <p style="margin-top: 0.8rem; color: var(--text-medium); line-height: 1.8;">
-                    Trip fare revenue, discounted over trip duration: r + γr + γ²r + ... <br>
-                    <strong>Discount factor γ = 0.9</strong> (accounts for time value of money)
-                </p>
-            </div>
-
-            <div style="background: var(--white); padding: 2.5rem; border: 3px solid var(--blue-main); border-radius: 8px; text-align: center; margin: 2rem 0;">
-                <strong style="color: var(--blue-deep); font-size: 1.3rem;">Advantage Function</strong>
-                <div style="font-size: 1.4rem; margin: 1.5rem 0; font-family: 'Courier New', monospace;">
-                    A(i,j) = r<sub>i,j</sub> + γ<sup>Δt</sup> V(s'<sub>i,j</sub>) − V(s<sub>i</sub>)
-                </div>
-                <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-medium); text-align: left; line-height: 1.8;">
-                    <strong>Where:</strong><br>
-                    • r<sub>i,j</sub> = Expected revenue from driver <em>i</em> serving order <em>j</em><br>
-                    • V(s'<sub>i,j</sub>) = Value of destination zone (learned from historical data)<br>
-                    • V(s<sub>i</sub>) = Value of current zone (what driver gives up)<br>
-                    • γ<sup>Δt</sup> = Discount over trip duration<br>
-                    <br>
-                    <strong>Driver with highest A(i,j) gets matched to the passenger.</strong>
-                </p>
-            </div>
-
-            <p style="font-size: 1.05rem; line-height: 1.8;">
-                The system learns V(s) for each zone-time combination by observing millions of trips. 
-                High-value zones (like Midtown at 6 PM) have high V(s) because drivers find next trips quickly. 
-                Low-value zones (like outer Brooklyn at 3 AM) have low V(s). This creates intelligent matching 
-                without explicitly programming rules—the algorithm discovers optimal patterns through experience.
-            </p>
-
-            <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 1.5rem; padding: 1.5rem; background: var(--blue-light); border-radius: 8px;">
-                <strong>Connection to our findings:</strong> The surge in airport demand (+48%) and Manhattan 
-                core decline (-35%) likely reflects this optimization. Airports became high-V(s) <em>destinations</em> 
-                because they position drivers for lucrative return trips into Manhattan. Manhattan zones became 
-                saturated, lowering marginal V(s) due to overcrowding. The MDP system learned to prioritize 
-                strategic airport routes over short Manhattan hops—exactly what we see in the data.
-            </p>
-        </div>
+ 
 
         <div style="background: var(--white); border: 1px solid var(--border-light); border-radius: 12px; padding: 2.5rem; margin: 2rem 0; box-shadow: 0 2px 8px var(--shadow-soft);">
             <h3 style="font-family: 'Syne', sans-serif; font-size: 1.6rem; color: var(--blue-deep); margin-bottom: 1.5rem;">
@@ -828,9 +766,76 @@
 
     <!-- Appendix -->
     <div style="background: var(--light-grey); padding: 3rem 2rem; margin-top: 4rem; border-top: 3px solid var(--blue-soft);">
-        <section>
-            <h2 class="section-title">Technical Appendix</h2>
+        <div class="theory-box" style="margin-top: 3rem;">
+            <h3>The Mathematics: MDP Formulation</h3>
+            
+            <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem;">
+                The matching problem is formalized as a Markov Decision Process where the system learns 
+                optimal driver-passenger assignments through millions of trip observations:
+            </p>
 
+            <div style="background: var(--blue-light); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--blue-main); margin: 1.5rem 0;">
+                <strong style="color: var(--blue-deep); font-size: 1.2rem;">State Space (S):</strong>
+                <p style="margin-top: 0.8rem; color: var(--text-medium); line-height: 1.8;">
+                    Driver's current location (263 TLC zones) × Time of day (24 hours) × Day of week (7 days)<br>
+                    <strong>Total states:</strong> 263 × 24 × 7 = 44,184 possible states
+                </p>
+            </div>
+
+            <div style="background: var(--blue-light); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--blue-main); margin: 1.5rem 0;">
+                <strong style="color: var(--blue-deep); font-size: 1.2rem;">Actions (A):</strong>
+                <p style="margin-top: 0.8rem; color: var(--text-medium); line-height: 1.8;">
+                    <strong>SERVE:</strong> Accept the trip, transition to destination zone<br>
+                    <strong>IDLE:</strong> Remain in current location, wait for next request
+                </p>
+            </div>
+
+            <div style="background: var(--blue-light); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--blue-main); margin: 1.5rem 0;">
+                <strong style="color: var(--blue-deep); font-size: 1.2rem;">Reward (R):</strong>
+                <p style="margin-top: 0.8rem; color: var(--text-medium); line-height: 1.8;">
+                    Trip fare revenue, discounted over trip duration: r + γr + γ²r + ... <br>
+                    <strong>Discount factor γ = 0.9</strong> (accounts for time value of money)
+                </p>
+            </div>
+
+            <div style="background: var(--white); padding: 2.5rem; border: 3px solid var(--blue-main); border-radius: 8px; text-align: center; margin: 2rem 0;">
+                <strong style="color: var(--blue-deep); font-size: 1.3rem;">Advantage Function</strong>
+                <div style="font-size: 1.4rem; margin: 1.5rem 0; font-family: 'Courier New', monospace;">
+                    A(i,j) = r<sub>i,j</sub> + γ<sup>Δt</sup> V(s'<sub>i,j</sub>) − V(s<sub>i</sub>)
+                </div>
+                <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-medium); text-align: left; line-height: 1.8;">
+                    <strong>Where:</strong><br>
+                    • r<sub>i,j</sub> = Expected revenue from driver <em>i</em> serving order <em>j</em><br>
+                    • V(s'<sub>i,j</sub>) = Value of destination zone (learned from historical data)<br>
+                    • V(s<sub>i</sub>) = Value of current zone (what driver gives up)<br>
+                    • γ<sup>Δt</sup> = Discount over trip duration<br>
+                    <br>
+                    <strong>Driver with highest A(i,j) gets matched to the passenger.</strong>
+                </p>
+            </div>
+
+            <p style="font-size: 1.05rem; line-height: 1.8;">
+                The system learns V(s) for each zone-time combination by observing millions of trips. 
+                High-value zones (like Midtown at 6 PM) have high V(s) because drivers find next trips quickly. 
+                Low-value zones (like outer Brooklyn at 3 AM) have low V(s). This creates intelligent matching 
+                without explicitly programming rules—the algorithm discovers optimal patterns through experience.
+            </p>
+
+            <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 1.5rem; padding: 1.5rem; background: var(--blue-light); border-radius: 8px;">
+                <strong>Connection to our findings:</strong> The surge in airport demand (+48%) and Manhattan 
+                core decline (-35%) likely reflects this optimization. Airports became high-V(s) <em>destinations</em> 
+                because they position drivers for lucrative return trips into Manhattan. Manhattan zones became 
+                saturated, lowering marginal V(s) due to overcrowding. The MDP system learned to prioritize 
+                strategic airport routes over short Manhattan hops—exactly what we see in the data.
+            </p>
+        </div>
+        
+    </section>
+</div>
+        <section>
+            
+            <h2 class="section-title">Technical Appendix</h2>
+            
             <div class="content-grid">
                 <div class="content-card">
                     <div class="card-header">
@@ -892,7 +897,6 @@
                     </div>
                 </div>
             </div>
-
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 3rem 0;">
                 <span style="padding: 0.8rem 1.5rem; background: var(--blue-light); border: 1px solid var(--blue-soft); border-radius: 25px; font-weight: 600;">Reinforcement Learning</span>
                 <span style="padding: 0.8rem 1.5rem; background: var(--blue-light); border: 1px solid var(--blue-soft); border-radius: 25px; font-weight: 600;">MDPs</span>
@@ -903,8 +907,6 @@
                 <span style="padding: 0.8rem 1.5rem; background: var(--blue-light); border: 1px solid var(--blue-soft); border-radius: 25px; font-weight: 600;">Big Data</span>
                 <span style="padding: 0.8rem 1.5rem; background: var(--blue-light); border: 1px solid var(--blue-soft); border-radius: 25px; font-weight: 600;">Production ML</span>
             </div>
-        </section>
-    </div>
 
     <!-- Footer -->
     <footer>
