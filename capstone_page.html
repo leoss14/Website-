@@ -66,8 +66,8 @@
         /* SECTIONS */
         section {
             min-height: 100vh;
-            padding: 100px 40px 60px;
-            scroll-margin-top: 70px;
+            padding: 140px 40px 60px;
+            scroll-margin-top: 130px;
         }
         
         section:nth-child(even) {
@@ -241,10 +241,23 @@
     </style>
 </head>
 <body>
-    <!-- NAVIGATION -->
-    <nav>
+    <!-- PORTFOLIO NAVIGATION -->
+    <div style="position: fixed; top: 0; left: 0; right: 0; background: white; border-bottom: 3px solid var(--lse-red); padding: 15px 0; z-index: 1001; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" style="font-size: 1.5rem; font-weight: 700; color: var(--moodys-blue); text-decoration: none;">LL</a>
+            <div style="display: flex; gap: 40px;">
+                <a href="index.html" style="color: var(--dark-grey); text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 16px; border-radius: 4px; transition: all 0.3s;">Home</a>
+                <a href="projects.html" style="color: var(--dark-grey); text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 16px; border-radius: 4px; transition: all 0.3s;">All Projects</a>
+                <a href="about.html" style="color: var(--dark-grey); text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 16px; border-radius: 4px; transition: all 0.3s;">About</a>
+                <a href="contact.html" style="color: var(--dark-grey); text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 16px; border-radius: 4px; transition: all 0.3s;">Contact</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PROJECT NAVIGATION -->
+    <nav style="top: 63px;">
         <ul>
-            <li><a href="#home">Home</a></li>
+            <li><a href="#home">Overview</a></li>
             <li><a href="#maps">Production Maps</a></li>
             <li><a href="#clustering">Clustering</a></li>
             <li><a href="#analysis">Analysis</a></li>
@@ -291,7 +304,7 @@
             </p>
             
             <div class="viz-full">
-                <iframe src="map_production_final.html"></iframe>
+                <iframe src="capstone_visualizations/map_production_final.html"></iframe>
             </div>
         </div>
     </section>
@@ -311,17 +324,17 @@
                 <div class="viz-card">
                     <h3>Country Clusters</h3>
                     <div class="viz-content">
-                        <iframe src="map_clusters.html"></iframe>
+                        <iframe src="capstone_visualizations/map_clusters.html"></iframe>
                     </div>
-                    <a href="map_clusters.html" target="_blank" class="view-btn">View Full Screen</a>
+                    <a href="capstone_visualizations/map_clusters.html" target="_blank" class="view-btn">View Full Screen</a>
                 </div>
                 
                 <div class="viz-card">
                     <h3>PCA Scatter Plot</h3>
                     <div class="viz-content">
-                        <iframe src="scatter_pca.html"></iframe>
+                        <iframe src="capstone_visualizations/scatter_pca.html"></iframe>
                     </div>
-                    <a href="scatter_pca.html" target="_blank" class="view-btn">View Full Screen</a>
+                    <a href="capstone_visualizations/scatter_pca.html" target="_blank" class="view-btn">View Full Screen</a>
                 </div>
             </div>
             
@@ -329,17 +342,17 @@
                 <div class="viz-card">
                     <h3>PC1 Loadings (Economic Development)</h3>
                     <div class="viz-content">
-                        <iframe src="pca_loadings_pc1.html"></iframe>
+                        <iframe src="capstone_visualizations/pca_loadings_pc1.html"></iframe>
                     </div>
-                    <a href="pca_loadings_pc1.html" target="_blank" class="view-btn">View Full Screen</a>
+                    <a href="capstone_visualizations/pca_loadings_pc1.html" target="_blank" class="view-btn">View Full Screen</a>
                 </div>
                 
                 <div class="viz-card">
                     <h3>PC2 Loadings (Hydrocarbon Production)</h3>
                     <div class="viz-content">
-                        <iframe src="pca_loadings_pc2.html"></iframe>
+                        <iframe src="capstone_visualizations/pca_loadings_pc2.html"></iframe>
                     </div>
-                    <a href="pca_loadings_pc2.html" target="_blank" class="view-btn">View Full Screen</a>
+                    <a href="capstone_visualizations/pca_loadings_pc2.html" target="_blank" class="view-btn">View Full Screen</a>
                 </div>
             </div>
             

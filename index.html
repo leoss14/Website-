@@ -2,10 +2,185 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=Pages/index.html">
-    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonardo Luksic - Data Science Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>Redirecting to portfolio...</p>
-</body>
-</html>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="index.html" class="logo">LL</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">All Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Leonardo Luksic</h1>
+                <div class="subtitle">Data Scientist & Econometrician</div>
+                <div class="tagline">MPA Data Science · London School of Economics</div>
+                <p style="color: var(--text-medium); margin-bottom: 2.5rem; font-size: 1.05rem;">
+                    This portfolio presents projects involving the use of econometric techniques, machine learning and spatial modelling.
+                </p>
+                <div>
+                    <a href="projects.html" class="cta-btn btn-primary">View Projects</a>
+                    <a href="contact.html" class="cta-btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section style="background: var(--white);">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">
+            Some of the project I was involved with included economic analysis of natural resource production with Moody's ratings, 
+            use of Reinforcement Learning to predict Central Bank interest rates, analysis of the Italian export basket and analysis of 
+            pink tax on UK grocery shops.
+        </p>
+
+        <div class="projects-grid">
+            
+            <!-- Uber RL -->
+            <div class="project-card" onclick="location.href='uber_project.html'">
+                <div class="project-header">
+                    <div class="project-tag">Reinforcement Learning</div>
+                    <h3 class="project-title">Uber NYC: RL Order-Dispatch</h3>
+                    <p class="project-desc">
+                        Business analysis of Uber ridesharing evolution from 2018 to 2025 across NYC. Following the deployment of 
+                        Reinforcement Learning to optimize driver-customer matching, the service experienced strategic shifts: decreased wait times, 
+                        increased demand concentration at high-value zones (airports +48%), and Manhattan core decline (-35%).
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">Reinforcement Learning</span>
+                        <span class="skill-tag">K-Means</span>
+                        <span class="skill-tag">MDP</span>
+                        <span class="skill-tag">TD Learning</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--lse-red); font-weight: 600;">View Details →</span>
+                        <span class="priority-high">High Priority</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moody's -->
+            <div class="project-card" onclick="location.href='capstone_page.html'">
+                <div class="project-header">
+                    <div class="project-tag">Economic Complexity</div>
+                    <h3 class="project-title">Natural Resource Clustering (Moody's)</h3>
+                    <p class="project-desc">
+                        Analysis for Moody's Ratings examining 208 countries' transitions from resource extraction to value-added industries.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">Clustering</span>
+                        <span class="skill-tag">LASSO/Ridge</span>
+                        <span class="skill-tag">Panel Data</span>
+                        <span class="skill-tag">Imputation</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--lse-red); font-weight: 600;">View Details →</span>
+                        <span class="priority-high">High Priority</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RL Bank Rates -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-tag">Reinforcement Learning</div>
+                    <h3 class="project-title">Bank Rates Prediction</h3>
+                    <p class="project-desc">
+                        RL applied to Federal Reserve monetary policy using macroeconomic indicators (GDP, inflation, federal funds rate).
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">RL</span>
+                        <span class="skill-tag">Time Series</span>
+                        <span class="skill-tag">Monetary Policy</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--lse-red); font-weight: 600;">Coming Soon</span>
+                        <span class="priority-high">High Priority</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Econometrics -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-tag">Econometrics</div>
+                    <h3 class="project-title">Applied Econometric Analysis</h3>
+                    <p class="project-desc">
+                        Election fraud detection (Iran) and labor market outcomes (South Africa) using causal inference techniques.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">Hypothesis Testing</span>
+                        <span class="skill-tag">Causal Inference</span>
+                        <span class="skill-tag">Policy</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--lse-red); font-weight: 600;">Coming Soon</span>
+                        <span class="priority-high">High Priority</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spatial Trade -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-tag">Spatial Analysis</div>
+                    <h3 class="project-title">Italian Trade Networks</h3>
+                    <p class="project-desc">
+                        Economic complexity analysis of Italy's export patterns across 1000+ products using network analysis.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">Economic Complexity</span>
+                        <span class="skill-tag">Network Analysis</span>
+                        <span class="skill-tag">QGIS</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--lse-red); font-weight: 600;">Coming Soon</span>
+                        <span class="priority-high">High Priority</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/leonardo-luksic-3b9251240/" target="_blank" class="social-link">
+                    LinkedIn
+                </a>
+                <a href="https://github.com/leoss14" target="_blank" class="social-link">
+                    GitHub
+                </a>
+                <a href="/cdn-cgi/l/email-protection#660a480a130d150f05260a150348070548130d" class="social-link">
+                    Email
+                </a>
+            </div>
+            <p style="color: var(--text-medium); font-size: 0.9rem;">© 2026 Leonardo Luksic</p>
