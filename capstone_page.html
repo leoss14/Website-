@@ -62,9 +62,11 @@
         
         /* SECTIONS */
         section {
-            min-height: 100vh;
-            padding: 100px 40px 60px;
-            scroll-margin-top: 70px;
+            padding: 70px 40px 50px;
+        }
+
+        section:not(.hero) {
+            padding-top: 60px;
         }
         
         section:nth-child(even) {
@@ -72,7 +74,7 @@
         }
         
         .container {
-            max-width: 1100px;
+            max-width: 1250px;
             margin: 0 auto;
         }
         
@@ -133,8 +135,8 @@
         .highlight-box {
             background: white;
             border-radius: 8px;
-            padding: 25px;
-            margin: 30px 0;
+            margin: 25px 0;
+            padding: 22px;
             border-left: 6px solid var(--lse-red);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
@@ -161,7 +163,7 @@
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             margin: 40px 0;
         }
@@ -248,6 +250,7 @@
         .viz-card h4 {
             margin-top: 0;
             margin-bottom: 15px;
+            border-top: 3px solid rgba(0,0,0,0.05);
         }
         
         .viz-card iframe {
@@ -272,6 +275,14 @@
             .hero h1 { font-size: 2.5em; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .grid-2, .viz-grid { grid-template-columns: 1fr; }
+        }
+        .compact {
+        padding-top: 50px;
+        padding-bottom: 40px;
+        }
+        .compact p,
+        .compact li {
+            font-size: 0.95em;
         }
     </style>
 </head>
@@ -309,10 +320,6 @@
                 <div class="stat-card">
                     <h3>5</h3>
                     <p>Clusters</p>
-                </div>
-                <div class="stat-card">
-                    <h3>53%</h3>
-                    <p>Variance Explained</p>
                 </div>
             </div>
         </div>
@@ -361,7 +368,7 @@
         <div class="container">
             <h2>Global Production Patterns</h2>
             
-            <p style="text-align: center; font-size: 1.15em; margin-bottom: 30px;">
+            <p style="max-width: 900px; margin: 0 auto 25px; font-size: 1.05em;">
                 This interactive charts allow to explore the natural resource production across countries and <time datetime="
                 " class=""></time>
                 Production values represent total USD value (physical production × global prices). The toggle options allow to 
@@ -373,122 +380,92 @@
             <div class="highlight-box">
                 <h3>Key Observations</h3>
                 <ul style="padding-left: 25px;">
+                    <li><strong>NOTE:</strong> WRONG DATA, CORRECT</li>
                     <li><strong>Absolute Production:</strong> Dominated by large economies (China $280B, USA $273B, Russia $201B in 2019)</li>
                     <li><strong>Per Capita Production:</strong> Small Gulf states (Qatar $2.6K, Brunei $1.1K) and resource-rich developed nations (Norway $856). lead</li>
-                    <li><strong>GDP-Normalized Production:</strong> Shows smaller states highly reliant on natural resources, like Qatar (2.8%), Brunei (1.9%) and Norway (1.34%). e</li>
+                    <li><strong>GDP-Normalized Production:</strong> Shows smaller states highly reliant on natural resources, like Qatar (2.8%), Brunei (1.9%) and Norway (1.34%).</li>
                     <li><strong>Resource Specialization:</strong> Clear geographic patterns emerge with oil being dominant in the Middle East, gas in Russia, Central Asia and minerals in Australia and South America.</li>
                 </ul>
             </div>
         </div>
     </section>
-    
     <!-- CLUSTERING ANALYSIS -->
     <section id="clustering">
         <div class="container">
             <h2>Clustering Analysis</h2>
-            
-            <p style="text-align: center; font-size: 1.15em; margin-bottom: 30px;">
-                This technique allows to group countries in terms of our key variables of interest, like resource production, 
-                Economic Complexity Index, and Human Capital Index using K-means clustering with PCA. 
+
+            <p style="text-align: center; font-size: 1.15em; margin-bottom: 35px;">
+                Countries are grouped using K-means clustering on principal components derived from 
+                resource production, Economic Complexity Index, and Human Capital Index.
+                Clusters capture similarities in economic structure rather than levels of income or growth.
             </p>
-            
-            <div class="viz-grid">
-                <div class="viz-card">
-                    <h4>Country Clusters</h4>
-                    <iframe src="capstone_visualizations/individual_plots/map_clusters.html"></iframe>
-                </div>
-                
-                <div class="viz-card">
-                    <h4>PCA Scatter Plot</h4>
-                    <iframe src="capstone_visualizations/individual_plots/scatter_pca.html"></iframe>
-                </div>
+
+            <!-- FULL-WIDTH MAP -->
+            <div class="viz-card" style="width: 100%; margin-bottom: 45px;">
+                <h4 style="text-align: center;">Global Cluster Distribution</h4>
+                <iframe 
+                    src="capstone_visualizations/individual_plots/map_clusters.html"
+                    style="width: 100%; height: 650px; border: none;">
+                </iframe>
             </div>
-            
-            <div class="highlight-box blue-box">
-                <h3>Principal Component Analysis</h3>
-                <p style="margin-bottom: 20px;">
-                    Two principal components explain <strong>53.1%</strong> of variance in resource-economic patterns:
-                </p>
-                
-                <div class="grid-2">
-                    <div>
-                        <h4>PC1 (29.4%): Economic Development</h4>
-                        <ul style="padding-left: 25px; font-size: 0.95em;">
-                            <li>Driven by <strong>Economic Complexity Index</strong> (0.693) and <strong>Human Capital Index</strong> (0.686)</li>
-                            <li>Separates developed manufacturing economies from developing resource economies</li>
-                            <li>Weak negative correlation with metals production intensity</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4>PC2 (23.7%): Hydrocarbon Production</h4>
-                        <ul style="padding-left: 25px; font-size: 0.95em;">
-                            <li>Driven by <strong>Oil</strong> (0.683) and <strong>Natural Gas</strong> (0.678) production</li>
-                            <li>Identifies oil and gas exporters</li>
-                            <li>Negative correlation with coal production (-0.230)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="viz-grid">
-                <div class="viz-card">
-                    <h4>PC1 Loadings (Economic Development)</h4>
-                    <iframe src="capstone_visualizations/individual_plots/pca_loadings_pc1.html"></iframe>
-                </div>
-                
-                <div class="viz-card">
-                    <h4>PC2 Loadings (Hydrocarbon Intensity)</h4>
-                    <iframe src="capstone_visualizations/individual_plots/pca_loadings_pc2.html"></iframe>
-                </div>
-            </div>
-            
+
+            <!-- CLUSTER PROFILES -->
             <div class="highlight-box">
                 <h3>Cluster Profiles</h3>
-                
+
                 <div style="margin-top: 20px;">
-                    <h4>Cluster 0 (38 countries): Low-Income, Resource-Scarce</h4>
+                    <h4>Cluster 0 — Low-Income, Resource-Scarce (38 countries)</h4>
                     <p style="margin-left: 20px; color: #555;">
-                        <em>Representative:</em> Bangladesh, Chad, Cameroon, Burkina Faso<br>
-                        <strong>Profile:</strong> Low economic complexity, minimal resource production, low human capital
+                        Low economic complexity, limited resource production, low human capital.  
+                        Representative: Bangladesh, Chad, Cameroon, Burkina Faso.
                     </p>
                 </div>
-                
+
                 <div style="margin-top: 20px;">
-                    <h4>Cluster 1 (44 countries): Diversified Economies</h4>
+                    <h4>Cluster 1 — Diversified Economies (44 countries)</h4>
                     <p style="margin-left: 20px; color: #555;">
-                        <em>Representative:</em> Argentina, Australia, Albania, Bahrain<br>
-                        <strong>Profile:</strong> Moderate complexity, mixed resource portfolios, varied development levels
+                        Mixed production structures and development levels, without strong dependence on a single resource.  
+                        Representative: Argentina, Australia, Albania, Bahrain.
                     </p>
                 </div>
-                
+
                 <div style="margin-top: 20px;">
-                    <h4>Cluster 2 (13 countries): Oil & Gas Producers</h4>
+                    <h4>Cluster 2 — Oil & Gas Producers (13 countries)</h4>
                     <p style="margin-left: 20px; color: #555;">
-                        <em>Representative:</em> Algeria, Angola, Azerbaijan, Equatorial Guinea<br>
-                        <strong>Profile:</strong> High hydrocarbon production, moderate-to-low complexity, resource-dependent
+                        High hydrocarbon production combined with moderate or low economic complexity.  
+                        Representative: Algeria, Angola, Azerbaijan, Equatorial Guinea.
                     </p>
                 </div>
-                
+
                 <div style="margin-top: 20px;">
-                    <h4>Cluster 3 (24 countries): Advanced Manufacturing</h4>
+                    <h4>Cluster 3 — Advanced Manufacturing (24 countries)</h4>
                     <p style="margin-left: 20px; color: #555;">
-                        <em>Representative:</em> Canada, Denmark, Czechia, Croatia<br>
-                        <strong>Profile:</strong> High economic complexity, developed economies, moderate resource production
+                        High economic complexity and human capital, diversified production bases.  
+                        Representative: Canada, Denmark, Czechia, Croatia.
                     </p>
                 </div>
-                
+
                 <div style="margin-top: 20px;">
-                    <h4>Cluster 4 (5 countries): Extreme Resource Exporters</h4>
+                    <h4>Cluster 4 — Extreme Resource Exporters (5 countries)</h4>
                     <p style="margin-left: 20px; color: #555;">
-                        <em>Representative:</em> Brunei, Kuwait, Qatar, Trinidad & Tobago, Norway<br>
-                        <strong>Profile:</strong> Extreme hydrocarbon production (>1.5% GDP), high income, varied complexity
+                        Very high hydrocarbon production relative to GDP, high income, and concentrated export structures.  
+                        Representative: Brunei, Kuwait, Qatar, Norway, Trinidad & Tobago.
                     </p>
                 </div>
+            </div>
+
+            <!-- WHY CLUSTERS -->
+            <div class="highlight-box blue-box">
+                <h3>Why Clustering</h3>
+                <p style="font-size: 0.95em;">
+                    Clustering allows countries to be compared based on structural similarities rather than income levels or geography.
+                    This framework helps distinguish different development paths among resource-rich and resource-poor economies,
+                    and provides a consistent basis for analyzing outcomes across comparable groups.
+                </p>
             </div>
         </div>
     </section>
-    
+
     <!-- MACHINE LEARNING -->
     <section id="ml">
         <div class="container">
@@ -575,7 +552,7 @@
             <div class="viz-grid">
                 <div class="viz-card">
                     <h4>Model Comparison</h4>
-                    <iframe src="/capstone_visualizations/individual_plots/ml_model_comparison.html"></iframe>
+                    <iframe src="capstone_visualizations/individual_plots/ml_model_comparison.html"></iframe>
                 </div>
                 
                 <div class="viz-card">
@@ -741,7 +718,63 @@
             </div>
         </div>
     </section>
+    <!-- APPENDIX -->
+    <section id="appendix">
+        <div class="container">
+            <h2>Appendix: Methodological Details</h2>
+
+            <!-- PCA OVERVIEW -->
+            <div class="highlight-box">
+                <h3>Principal Component Analysis</h3>
+
+                <p style="margin-bottom: 20px;">
+                    PCA is used to reduce dimensionality before clustering. 
+                    The first two components explain <strong>53.1%</strong> of total variance.
+                </p>
+
+                <div class="grid-2">
+                    <div>
+                        <h4>PC1 – Economic Development (29.4%)</h4>
+                        <ul style="padding-left: 25px; font-size: 0.95em;">
+                            <li>High loadings on Economic Complexity Index and Human Capital Index</li>
+                            <li>Separates advanced manufacturing economies from low-income countries</li>
+                            <li>Weak negative relationship with metals production</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4>PC2 – Hydrocarbon Production (23.7%)</h4>
+                        <ul style="padding-left: 25px; font-size: 0.95em;">
+                            <li>Driven by oil and natural gas production</li>
+                            <li>Identifies energy exporters</li>
+                            <li>Negative association with coal production</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PCA SCATTER -->
+            <div class="viz-card">
+                <h4>PCA Scatter Plot (Clusters)</h4>
+                <iframe src="capstone_visualizations/individual_plots/scatter_pca.html"></iframe>
+            </div>
+
+            <!-- LOADINGS -->
+            <div class="viz-grid">
+                <div class="viz-card">
+                    <h4>PC1 Loadings</h4>
+                    <iframe src="capstone_visualizations/individual_plots/pca_loadings_pc1.html"></iframe>
+                </div>
+
+                <div class="viz-card">
+                    <h4>PC2 Loadings</h4>
+                    <iframe src="capstone_visualizations/individual_plots/pca_loadings_pc2.html"></iframe>
+                </div>
+            </div>
     
+            </div>
+        </div>
+    </section>
     <!-- FOOTER -->
     <footer>
         <p style="font-size: 1.3em; font-weight: 600; margin-bottom: 15px;">Natural Resources & Economic Complexity</p>
