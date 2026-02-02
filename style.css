@@ -93,41 +93,82 @@ nav {
     background: var(--light-grey);
 }
 
-/* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 120px 40px 80px;
-    background: white;
-    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(to bottom, #f8fafc 0%, #ffffff 100%);
 }
 
 .hero-content {
-    max-width: 1200px;
+    max-width: 700px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .hero-text h1 {
-    font-size: 3.5em;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 1rem;
     line-height: 1.2;
-    margin-bottom: 20px;
-    color: var(--moodys-blue);
 }
 
-.hero-text .subtitle {
-    font-size: 1.4em;
-    color: var(--lse-red);
+.subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
     font-weight: 600;
-    margin-bottom: 30px;
+    color: #ef4444;
+    margin-bottom: 0.75rem;
 }
 
-.hero-text .tagline {
-    font-size: 1.1em;
-    color: #666;
-    margin-bottom: 50px;
+.tagline {
+    font-size: 1rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+}
+
+.hero-description {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #475569;
+    margin-bottom: 2.5rem;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cta-btn {
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: white;
+    color: #3b82f6;
+    border: 2px solid #3b82f6;
+}
+
+.btn-secondary:hover {
+    background: #eff6ff;
 }
 
 /* Page Headers (for non-home pages) */

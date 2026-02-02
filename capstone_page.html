@@ -294,8 +294,7 @@
             <h1>Natural Resources &<br>Economic Complexity</h1>
             <p class="subtitle">Analyzing Production Patterns and Development Pathways</p>
             <p class="meta">
-                Moody's Ratings Capstone Project<br>
-                London School of Economics | MPA Data Science for Public Policy | 2025
+                Capstone Project with Moody's Ratings <br>
             </p>
             
             <div class="stats-grid">
@@ -363,8 +362,10 @@
             <h2>Global Production Patterns</h2>
             
             <p style="text-align: center; font-size: 1.15em; margin-bottom: 30px;">
-                Interactive exploration of natural resource production across countries and time. 
-                Production values represent total USD value (physical production × global prices).
+                This interactive charts allow to explore the natural resource production across countries and <time datetime="
+                " class=""></time>
+                Production values represent total USD value (physical production × global prices). The toggle options allow to 
+                visualise production value on aggregate, per capita and as a % of GDP.  
             </p>
             
             <iframe class="viz-embed" src="/capstone_visualizations/individual_plots/map_production.html"></iframe>
@@ -373,9 +374,9 @@
                 <h3>Key Observations</h3>
                 <ul style="padding-left: 25px;">
                     <li><strong>Absolute Production:</strong> Dominated by large economies (China $280B, USA $273B, Russia $201B in 2019)</li>
-                    <li><strong>Per Capita Production:</strong> Small Gulf states (Qatar $2.6K, Brunei $1.1K) and resource-rich developed nations (Norway $856) lead</li>
-                    <li><strong>GDP-Normalized Production:</strong> Trinidad & Tobago (3.2%), Qatar (2.8%), and Brunei (1.9%) show extreme resource dependence</li>
-                    <li><strong>Resource Specialization:</strong> Clear geographic patterns - oil (Middle East), gas (Russia, Central Asia), metals (Australia, South America)</li>
+                    <li><strong>Per Capita Production:</strong> Small Gulf states (Qatar $2.6K, Brunei $1.1K) and resource-rich developed nations (Norway $856). lead</li>
+                    <li><strong>GDP-Normalized Production:</strong> Shows smaller states highly reliant on natural resources, like Qatar (2.8%), Brunei (1.9%) and Norway (1.34%). e</li>
+                    <li><strong>Resource Specialization:</strong> Clear geographic patterns emerge with oil being dominant in the Middle East, gas in Russia, Central Asia and minerals in Australia and South America.</li>
                 </ul>
             </div>
         </div>
@@ -387,7 +388,8 @@
             <h2>Clustering Analysis</h2>
             
             <p style="text-align: center; font-size: 1.15em; margin-bottom: 30px;">
-                Countries grouped by GDP-normalized resource production, Economic Complexity Index, and Human Capital Index using K-means clustering with PCA.
+                This technique allows to group countries in terms of our key variables of interest, like resource production, 
+                Economic Complexity Index, and Human Capital Index using K-means clustering with PCA. 
             </p>
             
             <div class="viz-grid">
@@ -493,7 +495,9 @@
             <h2>Machine Learning Approach</h2>
             
             <p style="text-align: center; font-size: 1.15em; margin-bottom: 30px;">
-                Complementing traditional econometrics with regularized regression methods to identify key predictors of economic complexity.
+                This approach allows us to assess what are some of the key predictors of economic complexity. While traditional regressions
+                struggle with large amounts of predictive variables, techniques like LASSO and Random Forest can assess the contribution of multiple
+                predictors at the same time. We will test them later against traditional OLS methods. 
             </p>
             
             <div class="highlight-box blue-box">
