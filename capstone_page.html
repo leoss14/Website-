@@ -333,21 +333,24 @@
             background: white;
             border: 1px solid var(--border-light);
             border-radius: 10px;
-            padding: 25px;
+            overflow: hidden;
             margin: 25px 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
         
         .viz-card h4 {
-            margin-top: 0;
-            margin-bottom: 20px;
+            margin: 0;
+            padding: 16px 20px;
             color: var(--moodys-blue);
+            background: var(--light-grey);
+            border-bottom: 1px solid var(--border-light);
+            font-size: 1.1em;
         }
         
         .viz-card iframe {
             width: 100%;
             border: none;
-            border-radius: 5px;
+            display: block;
         }
         
         .viz-grid {
@@ -355,6 +358,10 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 25px;
             margin: 25px 0;
+        }
+        
+        .viz-grid .viz-card {
+            margin: 0;
         }
         
         /* METHODOLOGY SECTION - Special styling */
@@ -401,10 +408,16 @@
         }
         
         /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .viz-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2em; }
             h2 { font-size: 1.8em; }
-            .stats-grid, .two-col, .grid-3, .method-grid, .viz-grid {
+            .stats-grid, .two-col, .grid-3, .method-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -464,7 +477,7 @@
                     <p>Commodities Tracked</p>
                 </div>
                 <div class="stat-card">
-                    <h3>2000-2019</h3>
+                    <h3>1990-2019</h3>
                     <p>Time Period</p>
                 </div>
             </div>
@@ -478,11 +491,6 @@
                 navigate resource wealth. Four resource categories are examined: hydrocarbons (oil, gas, coal), 
                 metals (iron, copper, gold, etc.), minerals (phosphate, potash), and agricultural commodities.
             </p>
-
-            <div class="pull-quote">
-                "Resource endowments and economic complexity operate as partially independent factors, 
-                challenging deterministic 'resource curse' narratives."
-            </div>
         </div>
     </section>
 
@@ -660,9 +668,15 @@
         <div class="container">
             <h2>Cluster Visualizations</h2>
 
-            <div class="viz-card" style="text-align: center;">
-                <h4 style="text-align: center;">Geographic Distribution of Clusters</h4>
-                <iframe src="capstone_visualizations/individual_plots/map_clusters.html" height="600" style="width: 95%; max-width: 1000px; margin: 0 auto; display: block;"></iframe>
+            <div class="viz-grid">
+                <div class="viz-card">
+                    <h4>Geographic Distribution of Clusters</h4>
+                    <iframe src="capstone_visualizations/individual_plots/map_clusters.html" height="500"></iframe>
+                </div>
+                <div class="viz-card">
+                    <h4>Natural Resource Production by Country</h4>
+                    <iframe src="capstone_visualizations/individual_plots/map_production.html" height="500"></iframe>
+                </div>
             </div>
         </div>
     </section>
@@ -691,6 +705,43 @@
                         <li><strong>Model Performance:</strong> Regularized models achieve strong predictive accuracy</li>
                         <li><strong>Robustness:</strong> Key findings consistent across LASSO, Ridge, and Elastic Net</li>
                     </ul>
+                </div>
+            </div>
+
+            <h3>Panel Regression Results</h3>
+            <div class="viz-card">
+                <h4>Fixed Effects Models: Determinants of Economic Complexity</h4>
+                <div style="padding: 20px; text-align: center;">
+                    <img src="figures/regression_results_high_res.png" alt="Regression Results Table" style="max-width: 100%; height: auto; border-radius: 4px;">
+                </div>
+                <p style="padding: 0 20px 20px; margin: 0; font-size: 0.95em; color: var(--text-medium);">
+                    <strong>Note:</strong> All models include country and year fixed effects. Standard errors clustered at the country level. 
+                    Model (4) includes the HCI × Total Production interaction term, which shows positive and significant effects—suggesting 
+                    that human capital returns are amplified in resource-rich contexts rather than diminished.
+                </p>
+            </div>
+
+            <h3>Model Performance</h3>
+            <div class="viz-grid">
+                <div class="viz-card">
+                    <h4>Model Comparison (R² Scores)</h4>
+                    <iframe src="capstone_visualizations/individual_plots/ml_model_comparison.html" height="400"></iframe>
+                </div>
+                <div class="viz-card">
+                    <h4>Feature Importance (Elastic Net)</h4>
+                    <iframe src="capstone_visualizations/individual_plots/ml_feature_importance.html" height="400"></iframe>
+                </div>
+            </div>
+
+            <h3>Model Diagnostics</h3>
+            <div class="viz-grid">
+                <div class="viz-card">
+                    <h4>Predicted vs Actual ECI</h4>
+                    <iframe src="capstone_visualizations/individual_plots/ml_predicted_vs_actual.html" height="400"></iframe>
+                </div>
+                <div class="viz-card">
+                    <h4>Residual Distribution</h4>
+                    <iframe src="capstone_visualizations/individual_plots/ml_residuals.html" height="400"></iframe>
                 </div>
             </div>
 
@@ -798,21 +849,21 @@
             </div>
 
             <!-- PCA SCATTER -->
-            <div class="viz-card" style="text-align: center;">
-                <h4 style="text-align: center;">PCA Scatter Plot (Clusters)</h4>
-                <iframe src="capstone_visualizations/individual_plots/scatter_pca.html" height="500" style="width: 95%; max-width: 1000px; margin: 0 auto; display: block;"></iframe>
+            <div class="viz-card">
+                <h4>PCA Scatter Plot (Clusters)</h4>
+                <iframe src="capstone_visualizations/individual_plots/scatter_pca.html" height="500"></iframe>
             </div>
 
             <!-- LOADINGS -->
             <div class="viz-grid">
                 <div class="viz-card">
                     <h4>PC1 Loadings</h4>
-                    <iframe src="capstone_visualizations/individual_plots/pca_loadings_pc1.html" height="400"></iframe>
+                    <iframe src="capstone_visualizations/individual_plots/pca_loadings_pc1.html" height="350"></iframe>
                 </div>
 
                 <div class="viz-card">
                     <h4>PC2 Loadings</h4>
-                    <iframe src="capstone_visualizations/individual_plots/pca_loadings_pc2.html" height="400"></iframe>
+                    <iframe src="capstone_visualizations/individual_plots/pca_loadings_pc2.html" height="350"></iframe>
                 </div>
             </div>
         </div>
