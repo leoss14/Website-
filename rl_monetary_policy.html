@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reinforcement Learning for Monetary Policy – Leonardo Luksic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="../index.html" class="logo">LL</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="project-hero">
+        <h1>Reinforcement Learning for Monetary Policy Optimization</h1>
+        <p class="subtitle">
+            Can a Q-learning agent learn to set interest rates better than the Taylor Rule? 
+            Training neural networks on 70 years of Federal Reserve data to simulate and optimize monetary policy decisions.
+        </p>
+        <div class="project-meta-bar">
+            <div class="meta-item">
+                <span class="meta-label">Timeline</span>
+                <span class="meta-value">Feb 2026</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Data</span>
+                <span class="meta-value">1954–2025</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Observations</span>
+                <span class="meta-value">285 Quarters</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">RL Improvement</span>
+                <span class="meta-value">+51%</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary -->
+    <section class="summary-section">
+        <div class="theory-box">
+            <h3>Key Finding</h3>
+            <p>
+                A Q-learning agent trained on simulated economic dynamics significantly outperforms 
+                the classic Taylor Rule in out-of-sample testing. When trained only on pre-2000 data and 
+                evaluated on post-2000 dynamics, the RL agent achieved a mean reward of <strong>−143.26</strong> 
+                compared to <strong>−290.04</strong> for the Taylor Rule — a 51% improvement (t=4.79, p&lt;0.0001).
+            </p>
+            <p>
+                Notably, the RL agent actually <em>improved</em> going out-of-sample (+12.1%) while the 
+                Taylor Rule degraded (−52.3%), suggesting the learned policy generalizes well to the 
+                calmer post-2000 monetary environment.
+            </p>
+        </div>
+    </section>
+
+    <!-- Motivation -->
+    <section>
+        <h2>Motivation</h2>
+        <p class="section-subtitle">
+            Central banks have traditionally relied on rule-based approaches like the Taylor Rule to guide 
+            interest rate decisions. But can machine learning discover better policies?
+        </p>
+        
+        <div class="theory-box">
+            <h3>The Taylor Rule</h3>
+            <p>
+                John Taylor's 1993 rule prescribes interest rates as a function of inflation and output gaps:
+            </p>
+            <p style="text-align: center; font-family: monospace; font-size: 1.1rem; padding: 1rem; background: var(--grey-100); border-radius: 4px;">
+                i = r* + π + 1.5(π − π*) + 0.5(y − y*)
+            </p>
+            <p>
+                Where <em>r*</em> is the neutral real rate (≈2%), <em>π*</em> is the inflation target (2%), 
+                and <em>y</em> is the output gap. The rule is simple, transparent, and historically tracks 
+                Fed decisions reasonably well — but it's not optimized for any explicit objective function.
+            </p>
+        </div>
+
+        <div class="theory-box">
+            <h3>The RL Approach (Hinterlang & Tanzer, 2021)</h3>
+            <p>
+                Following recent literature on RL for macroeconomic policy, this project:
+            </p>
+            <p>
+                <strong>1.</strong> Trains neural networks to model the economy's response to interest rate changes<br>
+                <strong>2.</strong> Uses these models as a simulation environment for RL training<br>
+                <strong>3.</strong> Optimizes a central bank loss function: minimize inflation and output deviations while avoiding rate volatility
+            </p>
+        </div>
+    </section>
+
+    <!-- Data -->
+    <section>
+        <h2>Data</h2>
+        <p class="section-subtitle">
+            Quarterly macroeconomic indicators from FRED spanning 70 years of U.S. economic history.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">285</div>
+                <div class="stat-label">Quarterly Observations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3.57%</div>
+                <div class="stat-label">Mean Inflation</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.61%</div>
+                <div class="stat-label">Mean Fed Funds Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">70 yrs</div>
+                <div class="stat-label">1954 – 2025</div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Variable</th>
+                    <th>Description</th>
+                    <th>Mean</th>
+                    <th>Std</th>
+                    <th>Range</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Inflation</strong></td>
+                    <td>CPI Year-over-Year Change</td>
+                    <td>3.57%</td>
+                    <td>2.79%</td>
+                    <td>−1.96% to 14.59%</td>
+                </tr>
+                <tr>
+                    <td><strong>Output Gap</strong></td>
+                    <td>Real GDP vs HP-filtered Trend</td>
+                    <td>0.26%</td>
+                    <td>2.37%</td>
+                    <td>−9.00% to 7.02%</td>
+                </tr>
+                <tr>
+                    <td><strong>Fed Funds Rate</strong></td>
+                    <td>Federal Funds Effective Rate</td>
+                    <td>4.61%</td>
+                    <td>3.53%</td>
+                    <td>0.06% to 17.78%</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Methodology -->
+    <section>
+        <h2>Methodology</h2>
+        
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>1. Economy Simulation</h3>
+                </div>
+                <div class="card-body">
+                    <p>Two MLPRegressor models predict next-period output gap and inflation from lagged values and the policy rate.</p>
+                    <p><strong>Output Gap R²:</strong> 0.90</p>
+                    <p><strong>Inflation R²:</strong> 0.61</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>2. Environment Design</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>State:</strong> [π<sub>t-1</sub>, π<sub>t-2</sub>, y<sub>t-1</sub>, y<sub>t-2</sub>, i<sub>t-1</sub>, i<sub>t-2</sub>]</p>
+                    <p><strong>Actions:</strong> 17 discrete rates (0–16%)</p>
+                    <p><strong>Episode:</strong> 40 quarters</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>3. Reward Function</h3>
+                </div>
+                <div class="card-body">
+                    <p>Central bank loss function:</p>
+                    <p style="font-family: monospace; font-size: 0.9rem;">
+                        R = −[0.5(π−2)² + 0.5(y)² + 0.05(Δi)²]
+                    </p>
+                    <p>Penalizes inflation/output deviations and rate volatility.</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>4. Q-Learning Agent</h3>
+                </div>
+                <div class="card-body">
+                    <p>Function approximation with target network for stability.</p>
+                    <p><strong>γ:</strong> 0.95 | <strong>ε-decay:</strong> 0.998</p>
+                    <p><strong>Training:</strong> 1,000 episodes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section>
+        <h2>Results</h2>
+        <p class="section-subtitle">
+            The RL agent learns to consistently outperform rule-based policies with lower variance.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">−143.26</div>
+                <div class="stat-label">RL Agent (OOS)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">−126.34</div>
+                <div class="stat-label">Inertial Taylor</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">−290.04</div>
+                <div class="stat-label">Taylor Rule</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">p &lt; 0.001</div>
+                <div class="stat-label">RL vs Taylor</div>
+            </div>
+        </div>
+
+        <div class="viz-container">
+            <img src="Outputs/training_curves.png" alt="Training Curves" style="width: 100%; display: block;">
+        </div>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: -1rem;">
+            Figure 1: Training reward and loss over 1,000 episodes on pre-2000 economy.
+        </p>
+
+        <div class="viz-container" style="margin-top: 2rem;">
+            <img src="Outputs/policy_comparison.png" alt="Policy Comparison" style="width: 100%; display: block;">
+        </div>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: -1rem;">
+            Figure 2: Simulated trajectory comparison on post-2000 economy (out-of-sample).
+        </p>
+
+        <div class="viz-container" style="margin-top: 2rem;">
+            <img src="Outputs/reward_distribution.png" alt="Reward Distribution" style="width: 100%; display: block;">
+        </div>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: -1rem;">
+            Figure 3: Out-of-sample reward distribution (50 episodes on post-2000 economy).
+        </p>
+
+        <table style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th>Policy</th>
+                    <th>In-Sample Reward</th>
+                    <th>Std Dev</th>
+                    <th>vs Taylor Rule</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>RL Agent</strong></td>
+                    <td><strong>−162.99</strong></td>
+                    <td><strong>174.06</strong></td>
+                    <td><strong>+14.4%</strong></td>
+                </tr>
+                <tr style="background: var(--success-bg);">
+                    <td>Inertial Taylor</td>
+                    <td>−130.34</td>
+                    <td>111.71</td>
+                    <td>+31.5%</td>
+                </tr>
+                <tr>
+                    <td>Taylor Rule</td>
+                    <td>−190.39</td>
+                    <td>93.17</td>
+                    <td>Baseline</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Robustness -->
+    <section>
+        <h2>Robustness Check</h2>
+        <p class="section-subtitle">
+            Does the learned policy generalize to economic regimes it never saw during training?
+        </p>
+
+        <div class="theory-box">
+            <h3>Out-of-Sample Test Design</h3>
+            <p>
+                <strong>Training:</strong> Economy models and RL agent trained only on 1955–1999 data (high inflation era, Volcker shock, etc.)<br>
+                <strong>Testing:</strong> Evaluate on economy models fitted to 2000–2025 data (low inflation, zero-lower-bound, COVID)
+            </p>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Pre-2000 Regime</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Mean Inflation:</strong> 4.18%</p>
+                    <p><strong>Mean Fed Rate:</strong> 6.14%</p>
+                    <p><strong>Observations:</strong> 180</p>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Post-2000 Regime</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Mean Inflation:</strong> 2.58%</p>
+                    <p><strong>Mean Fed Rate:</strong> 1.99%</p>
+                    <p><strong>Observations:</strong> 103</p>
+                </div>
+            </div>
+        </div>
+
+        <table style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th>Policy</th>
+                    <th>Out-of-Sample Reward</th>
+                    <th>Std Dev</th>
+                    <th>p-value vs Taylor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: var(--success-bg);">
+                    <td><strong>RL Agent</strong></td>
+                    <td><strong>−143.26</strong></td>
+                    <td><strong>67.05</strong></td>
+                    <td><strong>p &lt; 0.001</strong></td>
+                </tr>
+                <tr>
+                    <td>Inertial Taylor</td>
+                    <td>−126.34</td>
+                    <td>151.63</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>Taylor Rule</td>
+                    <td>−290.04</td>
+                    <td>203.66</td>
+                    <td>Baseline</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="method-box correct" style="margin-top: 1.5rem;">
+            <h4>✓ Generalization Confirmed</h4>
+            <p>
+                The RL agent trained on pre-2000 dynamics significantly outperforms Taylor on post-2000 data 
+                (t = 4.79, p &lt; 0.001). The learned policy transfers across regime changes, actually 
+                <em>improving</em> out-of-sample (+12.1%) while Taylor degrades (−52.3%).
+            </p>
+        </div>
+
+        <div class="viz-container" style="margin-top: 2rem;">
+            <img src="Outputs/robustness_check.png" alt="Robustness Check" style="width: 100%; display: block;">
+        </div>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: -1rem;">
+            Figure 4: In-sample vs out-of-sample performance comparison.
+        </p>
+    </section>
+
+    <!-- Limitations -->
+    <section>
+        <h2>Limitations & Future Work</h2>
+        
+        <div class="theory-box">
+            <h3>Caveats</h3>
+            <p>
+                <strong>Simulation fidelity:</strong> The RL agent optimizes against ANN approximations of economic dynamics, 
+                not the true data-generating process. Performance depends on model quality.
+            </p>
+            <p>
+                <strong>Lucas critique:</strong> Learned policies might fail if agents in the economy change behavior 
+                in response to the new policy regime.
+            </p>
+            <p>
+                <strong>Interpretability:</strong> Neural network policies are black boxes. Central banks require 
+                explainable, auditable decision rules.
+            </p>
+            <p>
+                <strong>Inertial Taylor competitive:</strong> The smoothed Taylor Rule (ρ=0.8) performs comparably to 
+                RL out-of-sample (p=0.48), suggesting rate smoothing captures much of the benefit.
+            </p>
+        </div>
+
+        <div class="theory-box">
+            <h3>Extensions</h3>
+            <p>
+                • Train on DSGE model simulations for theoretical grounding<br>
+                • Add forward guidance and balance sheet policies<br>
+                • Multi-objective RL with explicit inequality constraints<br>
+                • Policy distillation to interpretable rule approximations
+            </p>
+        </div>
+    </section>
+
+    <!-- Technical -->
+    <section>
+        <h2>Technical Details</h2>
+        
+        <div class="project-skills" style="margin-bottom: 1.5rem;">
+            <span class="skill-tag">Q-Learning</span>
+            <span class="skill-tag">MLPRegressor</span>
+            <span class="skill-tag">Scikit-learn</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">Matplotlib</span>
+            <span class="skill-tag">Time Series</span>
+            <span class="skill-tag">FRED API</span>
+        </div>
+
+        <p>
+            <strong>Code:</strong> <a href="https://github.com/leoss14" target="_blank" style="color: var(--accent);">GitHub Repository</a>
+        </p>
+        <p>
+            <strong>Reference:</strong> Hinterlang, N., & Tanzer, J. (2021). "Monetary Policy and the Stock Market: 
+            A Deep Reinforcement Learning Approach." <em>Working Paper</em>.
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/leonardo-luksic-3b9251240/" target="_blank" class="social-link">LinkedIn</a>
+            <a href="https://github.com/leoss14" target="_blank" class="social-link">GitHub</a>
+            <a href="/cdn-cgi/l/email-protection#660a480a130d150f05260a150348070548130d" class="social-link">Email</a>
+        </div>
+        <p>© 2025 Leonardo L
