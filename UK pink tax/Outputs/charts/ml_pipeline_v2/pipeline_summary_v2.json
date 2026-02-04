@@ -1,0 +1,49 @@
+{
+  "version": "2.0",
+  "improvements": [
+    "3-class classification (female/male/none)",
+    "Color features cached to disk",
+    "TF-IDF fitted on training data only (no leakage)",
+    "Feature name validation",
+    "Food/non-gendered categories excluded",
+    "Human label validation included"
+  ],
+  "data": {
+    "total_products": 12832,
+    "excluded_categories": "8604",
+    "training_samples": 87,
+    "products_with_colors": 1247
+  },
+  "models": [
+    {
+      "Model": "L1 (LASSO)",
+      "Accuracy": 0.5454545454545454,
+      "F1_weighted": 0.5432506887052342
+    },
+    {
+      "Model": "L2 (Ridge)",
+      "Accuracy": 0.5,
+      "F1_weighted": 0.4936240230357878
+    },
+    {
+      "Model": "Random Forest",
+      "Accuracy": 0.5454545454545454,
+      "F1_weighted": 0.5363636363636363
+    },
+    {
+      "Model": "Hist Gradient Boosting",
+      "Accuracy": 0.5909090909090909,
+      "F1_weighted": 0.5883838383838383
+    },
+    {
+      "Model": "SVM",
+      "Accuracy": 0.45454545454545453,
+      "F1_weighted": 0.4402220586431112
+    }
+  ],
+  "predictions": {
+    "female": 4722,
+    "male": 974,
+    "none": 7136
+  }
+}

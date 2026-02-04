@@ -1,0 +1,73 @@
+{
+  "data": {
+    "total_products": 21436,
+    "human_validated": "256",
+    "explicitly_gendered": 2255
+  },
+  "features": {
+    "price_features": 2,
+    "store_features": 4,
+    "breadcrumb_features": 200,
+    "description_features": 500,
+    "color_features": 93,
+    "total_features": 798
+  },
+  "models": [
+    {
+      "Model": "SVM",
+      "Accuracy": 0.8717948717948718,
+      "Precision": 0.8597560975609756,
+      "Recall": 0.8924050632911392,
+      "F1": 0.8757763975155279,
+      "AUC": 0.9571757356567483
+    },
+    {
+      "Model": "Gradient Boosting",
+      "Accuracy": 0.9102564102564102,
+      "Precision": 0.9012345679012346,
+      "Recall": 0.9240506329113924,
+      "F1": 0.9125,
+      "AUC": 0.9402433010027946
+    },
+    {
+      "Model": "L2 (Ridge)",
+      "Accuracy": 0.8846153846153846,
+      "Precision": 0.88125,
+      "Recall": 0.8924050632911392,
+      "F1": 0.8867924528301887,
+      "AUC": 0.9366677626171297
+    },
+    {
+      "Model": "Random Forest",
+      "Accuracy": 0.842948717948718,
+      "Precision": 0.8011049723756906,
+      "Recall": 0.9177215189873418,
+      "F1": 0.855457227138643,
+      "AUC": 0.9299071181982574
+    },
+    {
+      "Model": "ElasticNet",
+      "Accuracy": 0.8653846153846154,
+      "Precision": 0.8186813186813187,
+      "Recall": 0.9430379746835443,
+      "F1": 0.8764705882352941,
+      "AUC": 0.9122554660529344
+    },
+    {
+      "Model": "L1 (LASSO)",
+      "Accuracy": 0.8493589743589743,
+      "Precision": 0.8032786885245902,
+      "Recall": 0.930379746835443,
+      "F1": 0.8621700879765396,
+      "AUC": 0.9066250205490712
+    }
+  ],
+  "best_model": "SVM",
+  "best_auc": 0.9571757356567483,
+  "predictions": {
+    "ml_female": 15389,
+    "ml_male": 6047,
+    "implicit_female": 6865,
+    "implicit_male": 1952
+  }
+}
