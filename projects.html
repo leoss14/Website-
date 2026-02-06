@@ -34,70 +34,94 @@
         
         <div class="projects-grid">
             
-            <!-- Uber RL Project -->
+            <!-- Uber Spatial Analysis -->
             <div class="project-card" onclick="location.href='uber_project.html'">
                 <div class="project-header">
-                    <div class="project-tag">Reinforcement Learning</div>
-                    <h3 class="project-title">Uber NYC: RL Order-Dispatch</h3>
+                    <div class="project-tag">Spatial Analysis</div>
+                    <h3 class="project-title">Uber NYC Demand Patterns</h3>
                     <p class="project-desc">
-                        MDP framework for ridesharing optimization. Identifies hot/cold demand zones across 1M+ rides using advantage function theory.
+                        Descriptive analysis of how Uber pickup geography shifted between 2018 and 2025. 
+                        Documents increased concentration at airports (+48%) and decline in Manhattan core zones.
                     </p>
                 </div>
                 <div class="project-body">
                     <div class="project-skills">
-                        <span class="skill-tag">Reinforcement Learning</span>
                         <span class="skill-tag">K-Means</span>
-                        <span class="skill-tag">MDP</span>
-                        <span class="skill-tag">TD Learning</span>
+                        <span class="skill-tag">GeoPandas</span>
+                        <span class="skill-tag">Plotly</span>
+                        <span class="skill-tag">Panel Data</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
-                        <span style="color: var(--lse-red); font-weight: 600;">View Details →</span>
-                        <span class="priority-high">High Priority</span>
+                        <span style="color: var(--accent); font-weight: 600;">View Details →</span>
                     </div>
                 </div>
             </div>
 
             <!-- Moody's Capstone -->
-            <div class="project-card" onclick="location.href='project-moodys-capstone.html'">
+            <div class="project-card" onclick="location.href='capstone_page.html'">
                 <div class="project-header">
                     <div class="project-tag">Economic Complexity</div>
-                    <h3 class="project-title">Natural Resource Clustering (Moody's)</h3>
+                    <h3 class="project-title">Natural Resources & Development</h3>
                     <p class="project-desc">
-                        Analysis for Moody's Ratings examining 208 countries' transitions from resource extraction to value-added industries.
+                        Capstone project with Moody's Ratings. Clustering 208 countries by resource production 
+                        patterns and economic complexity to examine how institutional quality mediates the resource curse.
                     </p>
                 </div>
                 <div class="project-body">
                     <div class="project-skills">
-                        <span class="skill-tag">Clustering</span>
+                        <span class="skill-tag">PCA</span>
+                        <span class="skill-tag">K-Means</span>
                         <span class="skill-tag">LASSO/Ridge</span>
-                        <span class="skill-tag">Panel Data</span>
-                        <span class="skill-tag">Imputation</span>
+                        <span class="skill-tag">Panel Regression</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
-                        <span style="color: var(--lse-red); font-weight: 600;">View Details →</span>
-                        <span class="priority-high">High Priority</span>
+                        <span style="color: var(--accent); font-weight: 600;">View Details →</span>
                     </div>
                 </div>
             </div>
 
-            <!-- RL Bank Rates -->
-            <div class="project-card">
+            <!-- RL Monetary Policy -->
+            <div class="project-card" onclick="location.href='rl_monetary_policy.html'">
                 <div class="project-header">
                     <div class="project-tag">Reinforcement Learning</div>
-                    <h3 class="project-title">Bank Rates Prediction</h3>
+                    <h3 class="project-title">Monetary Policy Simulation</h3>
                     <p class="project-desc">
-                        RL applied to Federal Reserve monetary policy using macroeconomic indicators (GDP, inflation, federal funds rate).
+                        Deep Q-Learning applied to Federal Reserve rate decisions using 70 years of 
+                        macroeconomic data. RL agent outperforms Taylor Rule by 51% out-of-sample.
                     </p>
                 </div>
                 <div class="project-body">
                     <div class="project-skills">
-                        <span class="skill-tag">RL</span>
+                        <span class="skill-tag">Deep Q-Learning</span>
                         <span class="skill-tag">Time Series</span>
-                        <span class="skill-tag">Monetary Policy</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">FRED API</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
-                        <span style="color: var(--lse-red); font-weight: 600;">Coming Soon</span>
-                        <span class="priority-high">High Priority</span>
+                        <span style="color: var(--accent); font-weight: 600;">View Details →</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pink Tax Analysis -->
+            <div class="project-card" onclick="location.href='pink_tax_project.html'">
+                <div class="project-header">
+                    <div class="project-tag">Text Analysis</div>
+                    <h3 class="project-title">Pink Tax Classification</h3>
+                    <p class="project-desc">
+                        Building a classifier to identify gendered products in UK supermarket data using 
+                        TF-IDF text features and color extraction from product images. 84% accuracy vs human labels.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">TF-IDF</span>
+                        <span class="skill-tag">Gradient Boosting</span>
+                        <span class="skill-tag">Image Analysis</span>
+                        <span class="skill-tag">Web Scraping</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--accent); font-weight: 600;">View Details →</span>
                     </div>
                 </div>
             </div>
@@ -118,8 +142,7 @@
                         <span class="skill-tag">Policy</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
-                        <span style="color: var(--lse-red); font-weight: 600;">Coming Soon</span>
-                        <span class="priority-high">High Priority</span>
+                        <span style="color: var(--text-muted); font-size: 0.9rem;">Write-up in progress</span>
                     </div>
                 </div>
             </div>
@@ -127,21 +150,20 @@
             <!-- Spatial Trade -->
             <div class="project-card">
                 <div class="project-header">
-                    <div class="project-tag">Spatial Analysis</div>
-                    <h3 class="project-title">Italian Trade Networks</h3>
+                    <div class="project-tag">Network Analysis</div>
+                    <h3 class="project-title">Italian Export Networks</h3>
                     <p class="project-desc">
                         Economic complexity analysis of Italy's export patterns across 1000+ products using network analysis.
                     </p>
                 </div>
                 <div class="project-body">
                     <div class="project-skills">
-                        <span class="skill-tag">Economic Complexity</span>
-                        <span class="skill-tag">Network Analysis</span>
+                        <span class="skill-tag">Product Space</span>
+                        <span class="skill-tag">igraph</span>
                         <span class="skill-tag">QGIS</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
-                        <span style="color: var(--lse-red); font-weight: 600;">Coming Soon</span>
-                        <span class="priority-high">High Priority</span>
+                        <span style="color: var(--text-muted); font-size: 0.9rem;">Write-up in progress</span>
                     </div>
                 </div>
             </div>
@@ -159,13 +181,9 @@
                 <a href="https://github.com/leoss14" target="_blank" class="social-link">
                     GitHub
                 </a>
-                <a href="mailto:l.luksic@lse.ac.uk" class="social-link">
+                <a href="/cdn-cgi/l/email-protection#117d3f7d647a627872517d62743f70723f647a" class="social-link">
                     Email
                 </a>
             </div>
-            <p style="color: var(--text-medium); font-size: 0.9rem;">© 2026 Leonardo Luksic</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+            <p style="color: var(--text-medium); font-size: 0.9rem;">© 2025 Leonardo Luksic</p>
+     

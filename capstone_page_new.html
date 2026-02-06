@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Resources & Economic Complexity | Leonardo Luksic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Page-specific styles only */
+        .viz-container h4 {
+            margin: 0;
+            padding: 1rem 1.25rem;
+            background: var(--grey-100);
+            border-bottom: 1px solid var(--border);
+            font-size: 1rem;
+        }
+        .viz-container iframe {
+            transform: scale(0.9);
+            transform-origin: top center;
+        }
+        .viz-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .viz-grid .viz-container {
+            margin: 0;
+        }
+        
+        .pull-quote {
+            background: var(--grey-100);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            font-size: 1.05rem;
+            color: var(--navy);
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .highlight-box {
+            background: var(--navy);
+            color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight-box h3,
+        .highlight-box h4 {
+            color: var(--white);
+            border: none;
+            padding-bottom: 0;
+        }
+        
+        .highlight-box p,
+        .highlight-box li {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .img-container {
+            padding: 1.5rem;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--grey-100);
+        }
+        
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .full-width-section {
+            max-width: none;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        
+        .full-width-section .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .viz-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="index.html" class="logo">LL</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="project-hero">
+        <h1>Natural Resources & Economic Complexity</h1>
+        <p class="subtitle">
+            Econometric analysis of resource dependence and development pathways across 208 countries.
+            Capstone project with Moody's Ratings.
+        </p>
+
+    </section>
+
+    <!-- Research Question -->
+    <section id="overview">
+        <h2>Research Question</h2>
+        
+        <p class="section-subtitle" style="font-size: 1.1rem; color: var(--navy); font-weight: 500;">
+            Do natural resource endowments constrain or enable economic diversification? 
+            How do resource-rich countries differ in their paths toward economic complexity?
+        </p>
+        
+        <p>
+            The "resource curse" hypothesis suggests that countries rich in natural resources often experience slower economic growth 
+            and lower development outcomes compared to resource-poor countries. This project examines this relationship empirically 
+            across 208 countries, analyzing patterns of natural resource production alongside measures of economic complexity, 
+            human capital, and institutional quality.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">208</div>
+                <div class="stat-label">Countries Analyzed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Commodities Tracked</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1990-2019</div>
+                <div class="stat-label">Time Period</div>
+            </div>
+        </div>
+
+        <h3>Analytical Approach</h3>
+        
+        <p>
+            The analysis integrates <strong>unsupervised learning</strong> (PCA and K-means clustering), 
+            <strong>econometric methods</strong> (panel regression with fixed effects), and 
+            <strong>machine learning</strong> (regularized regression) to identify patterns in how countries 
+            navigate resource wealth. Four resource categories are examined: hydrocarbons (oil, gas, coal), 
+            metals (iron, copper, gold, etc.), minerals (phosphate, potash), and agricultural commodities.
+        </p>
+    </section>
+
+    <!-- Production Map -->
+    <section>
+        <h2>Global Resource Production Patterns</h2>
+        
+        <p>
+            Natural resource production exhibits extreme geographic concentration. This visualization shows 
+            the global distribution of resource production intensity across all commodity categories.
+        </p>
+
+        <div class="viz-container">
+            <iframe loading="lazy"
+                    src="capstone_visualizations/individual_plots/cluster/map_production.html"
+                    height="700"></iframe>
+        </div>
+
+        <h3>Resource Production Dominance</h3>
+        
+        <p>
+            The diversity index below measures each country's share of global production across oil, gas, coal, 
+            and metals, with a power transformation (x^1.5) that rewards market dominance. Higher scores indicate 
+            countries that account for larger shares of global output — whether concentrated in one category or 
+            spread across several.
+        </p>
+        
+        <p>
+            China dominates with a score of 4,123, nearly five times higher than second-place Australia (850). 
+            This reflects China's outsized share of global coal and metals markets. The DRC ranks third (571) due 
+            to its dominance in cobalt and copper. Russia (380) and the USA (344) follow, with more balanced 
+            profiles across hydrocarbons and metals. Gulf states score lower because, despite enormous oil output, 
+            they represent smaller shares of global production than these industrial giants.
+        </p>
+
+        <div class="viz-container">
+            <h4>Resource Diversity Index (2019)</h4>
+            <iframe loading="lazy"
+                    src="capstone_visualizations/individual_plots/cluster/diversity_map.html"
+                    height="550"></iframe>
+        </div>
+    </section>
+
+    <!-- Key Findings -->
+    <section id="findings">
+        <h2>Key Findings</h2>
+
+        <div class="theory-box">
+            <h3>1. Resource Production is Highly Concentrated</h3>
+            <p>
+                Global natural resource production exhibits extreme concentration. A small number of countries account for 
+                the majority of production across all resource categories, while most countries show minimal resource intensity.
+            </p>
+            <ul style="padding-left: 1.5rem; margin-top: 1rem;">
+                <li><strong>Top 3 producers dominate:</strong> China ($280.5B), USA ($273.2B), and Russia ($200.9B) account for 61.6% of production among the top 10 producers</li>
+                <li><strong>High resource dependence is rare:</strong> Only 10 countries show resource production exceeding 7.5% of GDP (Kuwait 15.8%, Congo Rep. 15.1%, Qatar 12.5%)</li>
+                <li><strong>Hydrocarbon concentration:</strong> USA, Saudi Arabia, and Russia dominate oil production ($176.5B, $121.9B, $120.3B respectively)</li>
+                <li><strong>Metals concentration:</strong> China alone produces $90.7B in metals, followed by Australia ($25.6B) and Chile ($24.4B)</li>
+            </ul>
+        </div>
+        
+        <div class="theory-box">
+            <h3>2. Two Principal Dimensions Structure Resource-Development Relationships</h3>
+            <p>
+                PCA reveals that variation in resource-economic patterns is primarily structured along two orthogonal dimensions:
+            </p>
+            
+            <div class="method-box" style="margin-top: 1.5rem;">
+                <h4 style="color: var(--navy); margin-top: 0;">PC1 - Economic Development (31.6%)</h4>
+                <p style="margin-bottom: 0;">
+                    Countries vary primarily by economic sophistication and human capital, largely independent of resource endowments. 
+                    High-complexity economies cluster together regardless of resource production.
+                </p>
+            </div>
+            
+            <div class="method-box">
+                <h4 style="color: var(--navy); margin-top: 0;">PC2 - Hydrocarbon Intensity (24.1%)</h4>
+                <p style="margin-bottom: 0;">
+                    A second dimension captures oil and gas production intensity, identifying petrostates as a distinct category. 
+                    This operates independently of general development level.
+                </p>
+            </div>
+            
+            <p style="margin-top: 1.5rem;">
+                This suggests that while economic development and resource wealth are related, they represent distinct sources 
+                of variation - economic complexity is not mechanically determined by resource abundance.
+            </p>
+        </div>
+
+        <div class="theory-box">
+            <h3>3. Six Distinct Country Clusters Emerge</h3>
+            <p>
+                K-means clustering identifies six meaningful country groupings based on resource production patterns 
+                and economic characteristics:
+            </p>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Petrostates</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Examples:</strong> Angola, Azerbaijan, Congo Rep., Iraq, Saudi Arabia</p>
+                    <p><strong>Profile:</strong> Extreme oil dependence (8.3% of GDP), low ECI (-0.73)</p>
+                    <p><strong>Count:</strong> 11 countries</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Low-Income Diversified</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Examples:</strong> Albania, Algeria, Bangladesh, Botswana, Cameroon</p>
+                    <p><strong>Profile:</strong> Low ECI (-0.79), modest human capital, varied resource levels</p>
+                    <p><strong>Count:</strong> 45 countries</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Advanced Economies</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Examples:</strong> Germany, Japan, Australia, Canada, United States</p>
+                    <p><strong>Profile:</strong> High ECI (0.79), high human capital (3.2), low resource dependence</p>
+                    <p><strong>Count:</strong> 53 countries</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Mining-Dependent</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Examples:</strong> Chile, Peru, DRC, Bolivia, Guinea</p>
+                    <p><strong>Profile:</strong> High metals production (5.1% of GDP), low ECI (-0.91)</p>
+                    <p><strong>Count:</strong> 11 countries</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Wealthy Hydrocarbon Exporters</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Examples:</strong> Norway, Qatar, Brunei, Trinidad and Tobago</p>
+                    <p><strong>Profile:</strong> High oil/gas AND higher complexity (0.10), strong human capital (3.1)</p>
+                    <p><strong>Count:</strong> 4 countries</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Coal & Metals Outlier</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Examples:</strong> Mongolia</p>
+                    <p><strong>Profile:</strong> Extreme coal (5.2%) and metals (5.8%) production relative to GDP</p>
+                    <p><strong>Count:</strong> 1 country</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="theory-box">
+            <h3>4. Human Capital Mediates Resource Effects</h3>
+            <p>
+                The relationship between resources and complexity is mediated by human capital investment. 
+                Countries with high human capital indices show positive or neutral relationships between 
+                resource production and economic complexity.
+            </p>
+            
+            <div class="pull-quote">
+                The HCI x Production interaction term is positive and significant, suggesting that returns 
+                to human capital are <em>amplified</em> in resource-rich contexts rather than diminished.
+            </div>
+            
+            <p>
+                This finding challenges simplistic "resource curse" narratives and suggests that institutional 
+                and educational investments can transform resource wealth into a development asset.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Cluster Visualizations</h2>
+        <div class="viz-container">
+            <iframe loading="lazy"
+                    src="capstone_visualizations/individual_plots/cluster/map_clusters.html"
+                    style="width: 100%; height: 550px; border: none;"
+                    title="Cluster Map"></iframe>
+        </div>
+
+        <h3>Cluster Transitions (1995–2019)</h3>
+        
+        <p>
+            Static cluster assignments mask an important question: how stable are these groupings over time? 
+            The Sankey diagram below traces country movements between clusters from 1995 to 2019, revealing 
+            which development pathways are common and which are rare.
+        </p>
+
+        <div class="theory-box">
+            <h4 style="color: var(--accent); margin-top: 0;">Transition Patterns</h4>
+            <p>
+                Of 126 countries tracked across both years, <strong>79% remained in their original cluster</strong>. 
+                The remaining 21% (26 countries) shifted categories. Several patterns stand out:
+            </p>
+            <ul style="padding-left: 1.5rem; margin-top: 1rem;">
+                <li><strong>Upward mobility is possible but uncommon:</strong> 12 countries moved from "Low-Income Diversified" 
+                to "Advanced Economies" — including Brazil, Malaysia, Thailand, Türkiye, and the Philippines. These transitions 
+                typically accompanied sustained manufacturing development and human capital accumulation.</li>
+                <li><strong>Mining intensification:</strong> 6 countries moved into "Mining-Dependent" status, including Peru, 
+                DRC, Ghana, and Bolivia — reflecting expanded metals extraction relative to GDP.</li>
+                <li><strong>Petrostate persistence:</strong> 10 of 13 petrostates in 1995 remained petrostates in 2019. 
+                Norway and Qatar moved to "Wealthy Hydrocarbon Exporters," combining high oil/gas production with greater 
+                economic complexity.</li>
+                <li><strong>No upward mobility from petrostates:</strong> No country transitioned directly from "Petrostates" 
+                to "Advanced Economies" during this period.</li>
+            </ul>
+        </div>
+
+        <div class="viz-container">
+            <h4>Cluster Transitions: 1995 → 2019</h4>
+            <iframe loading="lazy"
+                    src="capstone_visualizations/individual_plots/cluster/cluster_sankey_transitions.html"
+                    height="550"></iframe>
+        </div>
+
+        <h3>Temporal Cluster Dynamics</h3>
+        
+        <p>
+            The animated map below shows cluster assignments year-by-year from 1995 to 2019. 
+            Most visible changes occur at the margins — countries near cluster boundaries may shift 
+            between adjacent groups based on yearly fluctuations in commodity prices or production volumes. 
+            Core members of each cluster tend to remain stable.
+        </p>
+
+        <div class="viz-container">
+            <h4>Cluster Assignments Over Time (1995–2019)</h4>
+            <iframe loading="lazy"
+                    src="capstone_visualizations/individual_plots/cluster/cluster_map_animated.html"
+                    height="600"></iframe>
+        </div>
+    </section>
+    <!-- Statistical Analysis -->
+    <section>
+        <h2>Econometric & Machine Learning Results</h2>
+
+        <div class="content-grid">
+            <div class="theory-box" style="margin: 0;">
+                <h4 style="color: var(--accent); margin-top: 0;">Econometric Insights</h4>
+                <ul style="padding-left: 1.5rem;">
+                    <li><strong>Resource Curse:</strong> When controlling for country and year fixed effects, resources do not inherently reduce complexity</li>
+                    <li><strong>Human Capital:</strong> HCI consistently positive and significant</li>
+                    <li><strong>Interaction Effect:</strong> HCI x Production term suggests returns to human capital amplified in resource-rich contexts</li>
+                    <li><strong>Institutions Matter:</strong> Rule of law and property rights show positive associations</li>
+                </ul>
+            </div>
+            
+            <div class="theory-box" style="margin: 0;">
+                <h4 style="color: var(--accent); margin-top: 0;">Machine Learning Insights</h4>
+                <ul style="padding-left: 1.5rem;">
+                    <li><strong>Top Predictors:</strong> Human capital and rule of law dominate feature importance</li>
+                    <li><strong>Heterogeneous Effects:</strong> Resource curse varies by country type — oil is positive for diversified economies, negative for resource-dependent ones</li>
+                    <li><strong>Model Performance:</strong> Tree-based models (XGBoost, LightGBM) achieve R² ≈ 0.82 with interactions</li>
+                    <li><strong>Interaction Value:</strong> Adding high-resource country interactions improves test R² by 1.7 percentage points</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Panel Regression Results</h3>
+        <div class="viz-container">
+            <h4>Fixed Effects Models: Determinants of Economic Complexity</h4>
+            <div class="img-container">
+                <img src="figures/regression_results_high_res.png" 
+                     alt="Regression Results Table"
+                     loading="lazy"
+                     onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<p style=color:var(--text-muted);>Image could not be loaded. Please ensure the file exists at: figures/regression_results_high_res.png</p>';">
+            </div>
+            <p style="padding: 1rem 1.25rem; margin: 0; font-size: 0.9rem; color: var(--text-muted); border-top: 1px solid var(--border);">
+                <strong>Note:</strong> All models include country and year fixed effects. Standard errors clustered at the country level. 
+                Model (4) includes the HCI x Total Production interaction term, which shows positive and significant effects - suggesting 
+                that human capital returns are amplified in resource-rich contexts rather than diminished.
+            </p>
+        </div>
+
+        <h3>Model Performance</h3>
+        <p>
+            Three model specifications are compared: a baseline resource curse model (8 features), 
+            an augmented model with high-resource country interactions (13 features), and a full structural model (17 features).
+            The interaction model tests whether resource effects differ for the 54 countries classified as resource-dependent 
+            based on 1995 resource rents exceeding 5% of GDP.
+        </p>
+        
+        <div class="viz-container">
+            <h4>Model Comparison Across Specifications (Test R²)</h4>
+            <iframe loading="lazy" src="capstone_visualizations/individual_plots/ml/ml_model_comparison.html" height="450"></iframe>
+        </div>
+
+        <h3>Interaction Effects: Does the Resource Curse Vary by Country Type?</h3>
+        
+        <p>
+            The interaction model reveals that the relationship between resource production and economic complexity 
+            differs substantially between high-resource-dependent countries and diversified economies. Ridge regression 
+            coefficients are standardized, allowing direct comparison of effect magnitudes.
+        </p>
+
+        <div class="viz-grid">
+            <div class="viz-container">
+                <h4>Ridge Coefficients with Interactions</h4>
+                <iframe loading="lazy" src="capstone_visualizations/individual_plots/ml/ml_coefficients_interactions.html" height="500"></iframe>
+            </div>
+            <div class="viz-container">
+                <h4>SHAP Feature Importance</h4>
+                <iframe loading="lazy" src="capstone_visualizations/individual_plots/ml/ml_shap_importance.html" height="500"></iframe>
+            </div>
+        </div>
+
+        <div class="pull-quote">
+            <strong>Key Finding:</strong> Oil production has a <em>positive</em> association with ECI in diversified economies (+0.07) 
+            but turns <em>negative</em> for resource-dependent countries (−0.10). The metals curse is stronger in non-resource-dependent 
+            countries (−0.49) than in resource-dependent ones (−0.15), suggesting adaptation effects. High-resource countries 
+            start at a lower baseline ECI (−0.15 intercept shift) even before accounting for production levels.
+        </div>
+
+        <div class="theory-box">
+            <h4 style="color: var(--accent); margin-top: 0;">Interpreting Interaction Coefficients</h4>
+            <div class="content-grid" style="margin-top: 1rem;">
+                <div>
+                    <p style="margin-bottom: 0.5rem;"><strong>Oil Production</strong></p>
+                    <ul style="padding-left: 1.5rem; margin: 0;">
+                        <li>Base effect (all countries): +0.07</li>
+                        <li>Interaction (high-resource): −0.17</li>
+                        <li>Total for high-resource: −0.10</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="margin-bottom: 0.5rem;"><strong>Metals Production</strong></p>
+                    <ul style="padding-left: 1.5rem; margin: 0;">
+                        <li>Base effect (all countries): −0.49</li>
+                        <li>Interaction (high-resource): +0.34</li>
+                        <li>Total for high-resource: −0.15</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.9rem; color: var(--text-muted);">
+                Positive interaction terms indicate the curse is <em>attenuated</em> in high-resource countries; 
+                negative terms indicate it is <em>amplified</em>.
+            </p>
+        </div>
+
+        <h3>Feature Importance</h3>
+        <div class="viz-grid">
+            <div class="viz-container">
+                <h4>Resource Curse Model (Baseline)</h4>
+                <iframe loading="lazy" src="capstone_visualizations/individual_plots/ml/ml_feature_importance_resource_curse.html" height="400"></iframe>
+            </div>
+            <div class="viz-container">
+                <h4>Full Structural Model</h4>
+                <iframe loading="lazy" src="capstone_visualizations/individual_plots/ml/ml_feature_importance_full.html" height="400"></iframe>
+            </div>
+        </div>
+
+        <h3>Model Diagnostics</h3>
+        <div class="viz-grid">
+            <div class="viz-container">
+                <h4>Predicted vs Actual ECI</h4>
+                <iframe loading="lazy" src="capstone_visualizations/individual_plots/ml/ml_predicted_vs_actual.html" height="400"></iframe>
+            </div>
+            <div class="viz-container">
+                <h4>Prediction Errors by Country</h4>
+                <iframe loading="lazy" src="capstone_visualizations/individual_plots/ml/ml_residuals_by_country.html" height="400"></iframe>
+            </div>
+        </div>
+        
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 1rem;">
+            <strong>Model failures:</strong> Countries with largest residuals include China and Thailand (underpredicted — 
+            strong manufacturing sectors not captured by the resource curse specification), and Azerbaijan and Venezuela 
+            (large swings reflecting volatility beyond what resource variables explain).
+        </p>
+
+        <div class="highlight-box">
+            <h3 style="text-align: center; margin-bottom: 1.5rem;">Policy Implications</h3>
+            
+            <div class="content-grid" style="margin: 0;">
+                <div>
+                    <h4>Context-Dependent Resource Curse</h4>
+                    <p>
+                        The resource curse is not universal. Oil production associates positively with complexity in 
+                        diversified economies (Canada, Norway) but negatively in resource-dependent countries. 
+                        Policy should focus on the conditions under which resources become constraints rather than 
+                        treating resource wealth as inherently problematic.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4>Heterogeneous Strategies</h4>
+                    <p style="margin-bottom: 0.75rem;">The interaction analysis suggests differentiated approaches:</p>
+                    <ul style="padding-left: 1.25rem; margin: 0;">
+                        <li>High-resource, low-complexity: Prioritize human capital and institutional reform</li>
+                        <li>Diversified resource producers: Leverage resource revenues for complexity-enhancing investments</li>
+                        <li>Metals-dependent economies: Focus on downstream processing and manufacturing linkages</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodological Notes -->
+    <section id="methods" class="summary-section full-width-section">
+        <div class="container">
+            <h2>Methodological Notes</h2>
+            
+            <div class="content-grid">
+                <div class="theory-box" style="margin: 0;">
+                    <h4 style="color: var(--accent); margin-top: 0;">Data Processing</h4>
+                    <ul style="padding-left: 1.5rem;">
+                        <li><strong>Resource Aggregation:</strong> 20+ commodities grouped into 4 categories</li>
+                        <li><strong>Production Values:</strong> Physical quantity x market price (USD)</li>
+                        <li><strong>GDP Normalization:</strong> Production / (GDP per capita x Population)</li>
+                        <li><strong>Standardization:</strong> Mean=0, Std=1 before PCA/clustering</li>
+                    </ul>
+                </div>
+                
+                <div class="theory-box" style="margin: 0;">
+                    <h4 style="color: var(--accent); margin-top: 0;">Statistical Methods</h4>
+                    <ul style="padding-left: 1.5rem;">
+                        <li><strong>PCA:</strong> 2 components, 55.7% variance explained</li>
+                        <li><strong>K-means:</strong> k=6, silhouette score = 0.344</li>
+                        <li><strong>Panel Regression:</strong> Country and year fixed effects</li>
+                        <li><strong>ML:</strong> Temporal split (train ≤2013, test 2014-2019), ridge/tree models with interaction terms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appendix -->
+    <section id="appendix">
+        <h2>Appendix: Methodological Details</h2>
+
+        <div class="theory-box">
+            <h3>Resource Diversity Decomposition</h3>
+            
+            <p>
+                The diversity index measures each country's global market share across four resource categories: oil, 
+                natural gas, coal, and metals. Higher scores indicate greater dominance in global production. 
+                A power transformation (x^1.5) rewards concentration without extreme distortion. The chart below 
+                decomposes this index for the top 20 producing countries.
+            </p>
+            
+            <p>
+                China dominates with a score of 4,123 — nearly five times higher than second-place Australia (850). 
+                This reflects China's outsized share of global metals and coal production. The DRC ranks third (571) 
+                due to its dominance in specific metals markets (cobalt, copper). Countries like Chile and Peru 
+                appear high due to concentrated metals extraction rather than diversified portfolios.
+            </p>
+        </div>
+
+        <div class="viz-container">
+            <iframe loading="lazy" src="capstone_visualizations/individual_plots/cluster/diversity_decomposed.html" height="700"></iframe>
+        </div>
+
+        <div class="theory-box">
+            <h3>Principal Component Analysis</h3>
+
+            <p>
+                PCA is used to reduce dimensionality before clustering. 
+                The first two components explain <strong>55.7%</strong> of total variance.
+            </p>
+
+            <div class="content-grid" style="margin-top: 1.5rem;">
+                <div>
+                    <h4>PC1 - Economic Development (31.6%)</h4>
+                    <ul style="padding-left: 1.5rem;">
+                        <li>High loadings on Economic Complexity Index (0.67) and Human Capital Index (0.62)</li>
+                        <li>Separates advanced manufacturing economies from low-income countries</li>
+                        <li>Negative relationship with metals production (-0.39)</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>PC2 - Hydrocarbon Production (24.1%)</h4>
+                    <ul style="padding-left: 1.5rem;">
+                        <li>Driven by oil (0.64) and natural gas (0.54) production</li>
+                        <li>Identifies energy exporters</li>
+                        <li>Negative association with coal production (-0.40)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="viz-container">
+            <h4>PCA Scatter Plot (Clusters)</h4>
+            <iframe loading="lazy" src="capstone_visualizations/individual_plots/cluster/scatter_pca.html" height="500"></iframe>
+        </div>
+
+        <div class="viz-grid">
+            <div class="viz-container">
+                <h4>PC1 Loadings</h4>
+                <iframe loading="lazy" src="capstone_visualizations/individual_plots/cluster/pca_loadings_pc1.html" height="350"></iframe>
+            </div>
+
+            <div class="viz-container">
+                <h4>PC2 Loadings</h4>
+                <iframe loading="lazy" src="capstone_visualizations/individual_plots/cluster/pca_loadings_pc2.html" height="350"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/leonardo-luksic-3b9251240/" target="_blank" class="social-link">LinkedIn</a>
+            <a href="https://github.com/leoss14" target="_blank" class="social-link">GitHub</a>
+            <a href="/cdn-cgi/l/email-protection#bbd795d7ced0c8d2d8fbd7c8de95dad895ced0" class="social-link">Email</a>
+        </div>
+        <p><strong>Natural Resources & Economic Complexity</strong></p>
+        <p>Moody's Ratings Capstone Project</p>
+        <p>MPA in Data Science for Public Policy - LSE -
