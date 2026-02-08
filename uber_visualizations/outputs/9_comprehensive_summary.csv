@@ -7,5 +7,5 @@ Unique Zones,257,259
 Top Pickup Zone,Midtown Center,JFK Airport
 Peak Hour,18:00,18:00
 Most Active Day,Saturday,Friday
-Gini Coefficient,0.3268,0.3754
+Gini Coefficient (zone-level),0.5115,0.4403
 Avg Cluster Shift (km),-,4.64

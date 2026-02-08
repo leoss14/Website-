@@ -1,0 +1,13 @@
+Metric,2018,2025
+Total Trips (All Companies),"19,808,094","20,405,666"
+Uber Trips,"4,502,999","15,356,455"
+Uber Market Share (%),22.7,75.3
+Sample Size,"4,519,809","15,447,196"
+Unique Pickup Zones,257,259
+Top Pickup Zone,Midtown Center,JFK Airport
+Top Dropoff Zone,JFK Airport,JFK Airport
+Dropoff Data Coverage (%),96.6,95.8
+Peak Hour,18:00,18:00
+Most Active Day,Saturday,Friday
+Gini Coefficient (PU zone),0.5109,0.4401
+Avg Cluster Shift (km),-,4.22
