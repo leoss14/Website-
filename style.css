@@ -44,7 +44,7 @@ body {
     background: var(--white);
     color: var(--text-primary);
     line-height: 1.65;
-    font-size: 16px;
+    font-size: 18px;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -294,9 +294,9 @@ section {
 }
 
 .section-subtitle {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--text-secondary);
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.25rem;
     line-height: 1.75;
 }
 
@@ -438,7 +438,7 @@ h3 {
 
 .project-desc {
     color: var(--text-secondary);
-    font-size: 0.925rem;
+    font-size: 0.975rem;
     line-height: 1.6;
 }
 
@@ -487,7 +487,7 @@ h3 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.25rem;
-    margin: 2rem 0;
+    margin: 1.25rem 0;
 }
 
 .stat-card,
@@ -550,7 +550,7 @@ h3 {
 .card-body {
     padding: 1.25rem;
     color: var(--text-secondary);
-    font-size: 0.925rem;
+    font-size: 0.975rem;
 }
 
 .card-body p {
@@ -618,7 +618,7 @@ table {
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid var(--border);
-    font-size: 0.925rem;
+    font-size: 0.975rem;
 }
 
 th {
