@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data science projects by Leonardo Luksic. Econometric analysis, machine learning, spatial statistics, and policy evaluation.">
+    <meta property="og:title" content="Projects - Leonardo Luksic">
+    <meta property="og:description" content="Data science projects by Leonardo Luksic. Econometric analysis, machine learning, spatial statistics, and policy evaluation.">
+    <meta property="og:type" content="website">
+    <title>Projects - Leonardo Luksic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <input type="checkbox" id="nav-check" class="nav-check" aria-hidden="true">
+            <a href="index.html" class="nav-home" aria-label="Home">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 10L10 3L17 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 8.5V16C5 16.3 5.2 16.5 5.5 16.5H8.5V12.5C8.5 12.2 8.7 12 9 12H11C11.3 12 11.5 12.2 11.5 12.5V16.5H14.5C14.8 16.5 15 16.3 15 16V8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="nav-home-label">Home</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <label for="nav-check" class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </nav>
+    </div>
+
+    <!-- Projects Section -->
+    <section>
+        <h2 class="section-title">Featured Projects</h2>
+        
+        <div class="projects-grid">
+            
+            <!-- Uber Spatial Analysis -->
+            <div class="project-card" onclick="location.href='projects/uber/page.html'">
+                <div class="project-header">
+                    <div class="project-tag">Spatial Analysis</div>
+                    <h3 class="project-title">Uber NYC Demand Patterns</h3>
+                    <p class="project-desc">
+                        Descriptive analysis of how Uber pickup geography shifted between 2018 and 2025. 
+                        Documents increased concentration at airports (+48%) and decline in Manhattan core zones.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">K-Means</span>
+                        <span class="skill-tag">GeoPandas</span>
+                        <span class="skill-tag">Plotly</span>
+                        <span class="skill-tag">Panel Data</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--accent); font-weight: 600;">View Details →</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moody's Capstone -->
+            <div class="project-card" onclick="location.href='projects/capstone/page.html'">
+                <div class="project-header">
+                    <div class="project-tag">Economic Complexity</div>
+                    <h3 class="project-title">Natural Resources & Development</h3>
+                    <p class="project-desc">
+                        Capstone project with Moody's Ratings. Clustering 208 countries by resource production 
+                        patterns and economic complexity to examine how institutional quality mediates the resource curse.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">PCA</span>
+                        <span class="skill-tag">K-Means</span>
+                        <span class="skill-tag">LASSO/Ridge</span>
+                        <span class="skill-tag">Panel Regression</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--accent); font-weight: 600;">View Details →</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RL Monetary Policy -->
+            <div class="project-card" onclick="location.href='projects/central-bank/page.html'">
+                <div class="project-header">
+                    <div class="project-tag">Econometrics</div>
+                    <h3 class="project-title">US Monetary Policy Rules</h3>
+                    <p class="project-desc">
+                        Regime-switching analysis of Federal Reserve interest rate decisions using 
+                        70 years of macroeconomic data. Estimates Taylor rule parameters across 
+                        inflation regimes and tests for structural breaks in policy behaviour.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">Markov-Switching</span>
+                        <span class="skill-tag">Time Series</span>
+                        <span class="skill-tag">Structural Breaks</span>
+                        <span class="skill-tag">FRED API</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--accent); font-weight: 600;">View Details →</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pink Tax Analysis -->
+            <div class="project-card" onclick="location.href='projects/pink-tax/page.html'">
+                <div class="project-header">
+                    <div class="project-tag">Text Analysis</div>
+                    <h3 class="project-title">Pink Tax Classification</h3>
+                    <p class="project-desc">
+                        Building a classifier to identify gendered products in UK supermarket data using 
+                        TF-IDF text features and color extraction from product images. 84% accuracy vs human labels.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">TF-IDF</span>
+                        <span class="skill-tag">Gradient Boosting</span>
+                        <span class="skill-tag">Image Analysis</span>
+                        <span class="skill-tag">Web Scraping</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--accent); font-weight: 600;">View Details →</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Econometrics -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-tag">Econometrics</div>
+                    <h3 class="project-title">Applied Econometric Analysis</h3>
+                    <p class="project-desc">
+                        Election fraud detection (Iran) and labor market outcomes (South Africa) using causal inference techniques.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">Hypothesis Testing</span>
+                        <span class="skill-tag">Causal Inference</span>
+                        <span class="skill-tag">Policy</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--text-muted); font-size: 0.9rem;">Write-up in progress</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spatial Trade -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-tag">Network Analysis</div>
+                    <h3 class="project-title">Italian Export Networks</h3>
+                    <p class="project-desc">
+                        Economic complexity analysis of Italy's export patterns across 1000+ products using network analysis.
+                    </p>
+                </div>
+                <div class="project-body">
+                    <div class="project-skills">
+                        <span class="skill-tag">Product Space</span>
+                        <span class="skill-tag">igraph</span>
+                        <span class="skill-tag">QGIS</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-light);">
+                        <span style="color: var(--text-muted); font-size: 0.9rem;">Write-up in progress</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/leonardo-luksic-3b9251240/" target="_blank" class="social-link">LinkedIn</a>
+            <a href="https://github.com/leoss14" target="_blank" class="social-link">GitHub</a>
+            <a href="/cdn-cgi/l/email-protection#4c20622039273f252f0c203f29622d2f623927" class="social-link">Email</a>
+        </div>
+    </footer>
+
+    <scrip

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Leonardo Luksic. Education at LSE, Bocconi, Yale-NUS, and Oxford. Background in econometrics, spatial analysis, and public policy.">
+    <meta property="og:title" content="About - Leonardo Luksic">
+    <meta property="og:description" content="About Leonardo Luksic. Education at LSE, Bocconi, Yale-NUS, and Oxford. Background in econometrics, spatial analysis, and public policy.">
+    <meta property="og:type" content="website">
+    <title>About - Leonardo Luksic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3.5rem clamp(1.5rem, 5vw, 6rem);
+        }
+
+        .about-section p {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .about-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-section h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-top: 2.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .education-item {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--grey-200);
+        }
+
+        .education-item:last-child {
+            border-bottom: none;
+        }
+
+        .education-item .degree {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.02rem;
+        }
+
+        .education-item .institution {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .education-item .year {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .education-item .note {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+            line-height: 1.6;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .lang-item {
+            text-align: center;
+            padding: 1.25rem 1rem;
+            background: var(--grey-100);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .lang-item .lang-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .lang-item .lang-level {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .interests-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .interest-tag {
+            padding: 0.45rem 1rem;
+            background: var(--grey-100);
+            border: 1px solid var(--grey-200);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        @media (max-width: 600px) {
+            .languages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <input type="checkbox" id="nav-check" class="nav-check" aria-hidden="true">
+            <a href="index.html" class="nav-home" aria-label="Home">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 10L10 3L17 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 8.5V16C5 16.3 5.2 16.5 5.5 16.5H8.5V12.5C8.5 12.2 8.7 12 9 12H11C11.3 12 11.5 12.2 11.5 12.5V16.5H14.5C14.8 16.5 15 16.3 15 16V8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="nav-home-label">Home</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <label for="nav-check" class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </nav>
+    </div>
+
+    <!-- Page Header -->
+    <div class="project-hero" style="padding-bottom: 1.5rem;">
+        <h1>About</h1>
+    </div>
+
+    <!-- Bio -->
+    <div class="about-section" style="padding-top: 2.5rem;">
+        <p>
+            I am a graduate student at the London School of Economics, completing an MPA in
+            Data Science for Public Policy. My work focuses on applied econometrics, machine learning,
+            and spatial analysis, with applications in economic development, public policy evaluation,
+            and market analysis.
+        </p>
+        <p>
+            Before LSE, I studied economics at Bocconi University in Milan, with exchange semesters
+            at Yale-NUS College in Singapore and the University of Oxford. These experiences shaped
+            my interest in quantitative approaches to policy problems across different institutional
+            contexts.
+        </p>
+        <p>
+            My current capstone project, in partnership with Moody's Ratings, examines how natural
+            resource endowments interact with institutional quality and human capital to shape
+            economic complexity across 208 countries. Other recent work covers spatial demand
+            analysis of ride-hailing markets, gender-based pricing in UK retail, and regime-switching
+            models of US monetary policy.
+        </p>
+        <p>
+            Outside of academic work, I served as Senior Editor for Podcasts at The Public Sphere
+            Journal, coordinating episode production and guest interviews on topics in public policy.
+            I also built a political compass tool for the Greek elections that reached over 10,000
+            users and ranked first on Google for related search terms.
+        </p>
+
+        <h2>Education</h2>
+
+        <div class="education-item">
+            <div class="degree">MPA in Data Science for Public Policy</div>
+            <div class="institution">London School of Economics and Political Science</div>
+            <div class="year">2024 - 2025</div>
+            <div class="note">Capstone project with Moody's Ratings on natural resource economics and economic complexity.</div>
+        </div>
+        <div class="education-item">
+            <div class="degree">BSc in International Economics, Management and Finance</div>
+            <div class="institution">Bocconi University, Milan</div>
+            <div class="year">2020 - 2024</div>
+            <div class="note">Exchange semesters at Yale-NUS College (Singapore) and the University of Oxford.</div>
+        </div>
+
+        <h2>Languages</h2>
+
+        <div class="languages-grid">
+            <div class="lang-item">
+                <div class="lang-name">Italian</div>
+                <div class="lang-level">Native</div>
+            </div>
+            <div class="lang-item">
+                <div class="lang-name">Croatian</div>
+                <div class="lang-level">Native</div>
+            </div>
+            <div class="lang-item">
+                <div class="lang-name">English</div>
+                <div class="lang-level">Fluent</div>
+            </div>
+            <div class="lang-item">
+                <div class="lang-name">French</div>
+                <div class="lang-level">Fluent</div>
+            </div>
+        </div>
+
+        <h2>Interests</h2>
+
+        <div class="interests-row">
+            <span class="interest-tag">Hiking</span>
+            <span class="interest-tag">Bouldering</span>
+            <span class="interest-tag">Geography</span>
+            <span class="interest-tag">Electoral Politics</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/leonardo-luksic-3b9251240/" target="_blank" class="social-link">LinkedIn</a>
+            <a href="https://github.com/leoss14" target="_blank" class="social-link">GitHub</a>
+            <a href="/cdn-cgi/l/email-protection#187436746d736b717b58746b7d36797b366d73" class="social-link">Email</a>
+        </div>
+    </footer>
+
+    <scrip

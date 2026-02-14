@@ -1,0 +1,11 @@
+product_name,sector_name,pci,distance,cog,lhf
+Cermets,Metals,1.7960885,0.50827897,0.5936216,-0.6551243
+"Flat-rolled products of other alloy steel, width > 600 mm",Metals,1.7617719,0.5080035,0.5405959,-0.6625745
+Instruments for physical or chemical analysis,Machinery,1.610147,0.51565635,0.7109765,-0.7074068
+"Articles for utensils, of cermet",Metals,2.1410801,0.5303831,0.7242751,-0.76122636
+Esters of other inorganic acids of nonmetals,Chemicals,2.0815382,0.533761,0.75393134,-0.7858804
+Nickel plates,Metals,1.9568459,0.5333747,0.6544898,-0.8059095
+Ion-exchangers based on polymers,Chemicals,1.7437464,0.5367841,0.6565114,-0.84725815
+Signaling glassware,Stone,1.6534786,0.53817827,0.74513614,-0.8538372
+Drafting tables and machines,Machinery,1.734301,0.53886735,0.7122957,-0.85560274
+Carboxyimide-function compounds,Chemicals,1.6574091,0.53872406,0.5732209,-0.87798846
